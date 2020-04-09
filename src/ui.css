@@ -54,3 +54,8 @@ body {
 .notice:not(:empty) {
   margin-bottom: 20px;
 }
+
+.visual-bell {
+  height: auto !important;
+  min-height: 36px;
+}

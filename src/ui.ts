@@ -35,9 +35,8 @@ const error = (message: string = "There was an error.") => {
   </div>`;
 };
 
-// pexelsClient.getPopularPhotos(10, 1)
-fetch("http://localhost:3000/pexels")
-  .then((resp) => resp.json())
+pexelsClient
+  .getPopularPhotos(10, Math.random() * 1000)
   .then(function (result) {
     for (const photo of result.photos) {
       markup.push(image(photo.src, photo.photographer, 200));
@@ -53,20 +52,34 @@ const insert = (event) => {
   // Check which image was clicked
   const url = event.path[0].dataset.insertUrl;
 
-  // Fetch the image
-  fetch(url)
-    .then((response) => {
-      return response.arrayBuffer();
-    })
-    .then((buffer) => {
-      parent.postMessage(
-        { pluginMessage: { type: "insert", data: new Uint8Array(buffer) } },
-        "*"
-      );
-    })
-    .catch((err) => {
-      render(error(err), document.getElementById("error"));
-    });
+  // Get the dimentsion of the image
+  const img = new Image();
+
+  img.onload = () => {
+    // Fetch the image
+    fetch(url)
+      .then((response) => {
+        return response.arrayBuffer();
+      })
+      .then((buffer) => {
+        // Send data to the pligin code
+        parent.postMessage(
+          {
+            pluginMessage: {
+              type: "insert",
+              data: new Uint8Array(buffer),
+              width: img.naturalWidth,
+              height: img.naturalHeight,
+            },
+          },
+          "*"
+        );
+      })
+      .catch((err) => {
+        render(error(err), document.getElementById("error"));
+      });
+  };
+  img.src = url;
 };
 
 // Event listeners and callbacks
