@@ -1,4 +1,6 @@
-*,*:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -30,6 +32,12 @@ body {
 
 .gallery__image {
   display: block;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.gallery__image:hover {
+  opacity: 1;
 }
 
 .footer {

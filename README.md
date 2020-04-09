@@ -1,5 +1,7 @@
 # Unofficial Pexels Figma Plugin
 
+Insert photos from the popular free stock photography site Pexels into your designs.
+
 ## Development
 
 ```
@@ -9,7 +11,7 @@ npm install
 ```
 
 ### Testing Without API Key
+
 ```
-npm install -g json-server
-json-server --watch db.json
+npm run api
 ```

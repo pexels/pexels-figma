@@ -1,6 +1,6 @@
 // Function that creates a rectangle on canvas with an image fill from image data
 function addImageToCanvas(data) {
-  let imageHash = figma.createImage(data).hash;
+  const imageHash = figma.createImage(data).hash;
   const rect = figma.createRectangle();
   rect.fills = [{ type: "IMAGE", scaleMode: "FIT", imageHash }];
   figma.currentPage.appendChild(rect);

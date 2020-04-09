@@ -22,7 +22,7 @@ const image = (
         alt="Photo by ${photographer}"
         width="${width}"
         height="${height}"
-        data-insert-url="${src.large2x}"
+        data-insert-url="${src.original}"
       />
     </li>
   `;
@@ -51,10 +51,10 @@ fetch("http://localhost:3000/pexels")
 // Send the image to the node
 const insert = (event) => {
   // Check which image was clicked
-  const large2x = event.path[0].dataset.insertUrl;
+  const url = event.path[0].dataset.insertUrl;
 
   // Fetch the image
-  fetch(large2x)
+  fetch(url)
     .then((response) => {
       return response.arrayBuffer();
     })
