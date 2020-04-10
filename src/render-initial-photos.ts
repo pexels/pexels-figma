@@ -1,7 +1,7 @@
 import { render } from "../node_modules/lit-html/lit-html";
 import PexelsAPI from "../node_modules/pexels-api-wrapper/index";
-import loading from "./loading-markup";
 import error from "./error-markup";
+import loading from "./loading-markup";
 import renderPhotos from "./render-photos";
 
 const pexelsClient = new PexelsAPI(process.env.API_KEY);
@@ -15,6 +15,7 @@ const renderInitialPhotos = (num = 20) => {
   // Get random popular photos
   pexelsClient
     .getCuratedPhotos(num, page)
+    // .then(handleErrors)
     .then(renderPhotos)
     .catch(function (e) {
       render(error(e), document.getElementById("notice"));

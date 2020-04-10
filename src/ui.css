@@ -66,12 +66,11 @@ figure {
   position: fixed;
   bottom: 60px;
   z-index: 99;
-  margin-right: 20px;
   left: 50%;
-  padding-left: 20px;
-  padding-right: 20px;
-  white-space: nowrap;
+  display: flex;
+  justify-content: center;
   transform: translateX(-50%);
+  max-width: 360px;
 }
 
 .visual-bell {
@@ -95,7 +94,7 @@ figure {
   background-clip: padding-box;
 }
 
-.search::-webkit-search-cancel-button {
+.search input::-webkit-search-cancel-button {
   position: relative;
   right: 4px;
 }

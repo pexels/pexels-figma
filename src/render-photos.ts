@@ -6,9 +6,6 @@ import renderControls from "./render-controls";
 const renderPhotos = (result) => {
   let markup = [];
 
-  // Render the pagination controls
-  renderControls(result);
-
   if (result.total_results === 0) {
     // Remove any notices
     // TODO Create an empty state
@@ -25,6 +22,9 @@ const renderPhotos = (result) => {
 
     // Remove any notices
     render([], document.getElementById("notice"));
+
+    // Render the pagination controls
+    renderControls(result);
   }
 
   return markup;

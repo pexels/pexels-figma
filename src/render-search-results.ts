@@ -18,6 +18,9 @@ const renderSearchResults = (event, page = 1, num = 20) => {
     // Remove the existing photos
     render([], document.getElementById("photos"));
 
+    // Remoe the controls in case it's the last page
+    render([], document.getElementById("controls"));
+
     // Search for photos
     pexelsClient
       .search(value, num, page)
