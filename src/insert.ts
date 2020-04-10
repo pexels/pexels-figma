@@ -16,9 +16,7 @@ const insert = (event) => {
   img.onload = () => {
     // Fetch the image
     fetch(url)
-      .then((response) => {
-        return response.arrayBuffer();
-      })
+      .then((response) => response.arrayBuffer())
       .then((buffer) => {
         // Send data to the pligin code
         parent.postMessage(
@@ -32,6 +30,7 @@ const insert = (event) => {
           },
           "*"
         );
+        // Remove the loading notice
         render([], document.getElementById("notice"));
       })
       .catch((err) => {

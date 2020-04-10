@@ -29,9 +29,6 @@ function addImageToCanvas({ width, height, data }) {
 
   // If there's a selection
   for (const node of figma.currentPage.selection) {
-    // Get the width and height of the image
-    // Find the best size of image from Pexels
-
     if ("fills" in node) {
       let fills = clone(node.fills);
       fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash }];

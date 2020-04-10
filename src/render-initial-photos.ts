@@ -1,12 +1,12 @@
 import { render } from "../node_modules/lit-html/lit-html";
 import PexelsAPI from "../node_modules/pexels-api-wrapper/index";
-import image from "./image-markup";
 import loading from "./loading-markup";
 import error from "./error-markup";
+import renderPhotos from "./render-photos";
 
 const pexelsClient = new PexelsAPI(process.env.API_KEY);
 
-const renderInitialPhotos = (markup = []) => {
+const renderInitialPhotos = (num = 20) => {
   // Get a random page
   const page = Math.round(Math.random() * 100);
 
@@ -14,16 +14,8 @@ const renderInitialPhotos = (markup = []) => {
   render(loading(), document.getElementById("notice"));
   // Get random popular photos
   pexelsClient
-    .getCuratedPhotos(10, page)
-    .then(function (result) {
-      // Iterate through each photo
-      for (const photo of result.photos) {
-        // Add the image markup to the array for rendering
-        markup.push(image(photo.src, photo.photographer, 200));
-      }
-      render(markup, document.getElementById("photos"));
-      render([], document.getElementById("notice"));
-    })
+    .getCuratedPhotos(num, page)
+    .then(renderPhotos)
     .catch(function (e) {
       render(error(e), document.getElementById("notice"));
     });
