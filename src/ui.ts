@@ -35,6 +35,7 @@ const error = (message: string = "There was an error.") => {
   </div>`;
 };
 
+// Get random popular photos
 pexelsClient
   .getPopularPhotos(10, Math.random() * 1000)
   .then(function (result) {
@@ -46,6 +47,29 @@ pexelsClient
   .catch(function (e) {
     render(error(e), document.getElementById("error"));
   });
+
+const search = (event) => {
+  console.log(event);
+  // Reset the array0p-x
+  let markup = [];
+  if (event && event.keyCode == 13) {
+    // Get the input value
+    const value = event.path[0].value;
+    let page = 1;
+    // Search for photos
+    pexelsClient
+      .search(value, 10, page)
+      .then(function (result) {
+        for (const photo of result.photos) {
+          markup.push(image(photo.src, photo.photographer, 200));
+        }
+        render(markup, document.getElementById("photos"));
+      })
+      .catch(function (e) {
+        render(error(e), document.getElementById("error"));
+      });
+  }
+};
 
 // Send the image to the node
 const insert = (event) => {
@@ -84,3 +108,4 @@ const insert = (event) => {
 
 // Event listeners and callbacks
 document.getElementById("photos").addEventListener("click", insert);
+document.getElementById("search").addEventListener("keyup", search);

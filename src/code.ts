@@ -5,10 +5,6 @@ function addImageToCanvas({ width, height, data }) {
   const imageHash = figma.createImage(data).hash;
 
   // If no selection
-  // Get the width and height of the image
-  // Create rectangle at 1/2 of that width/height
-  // Apply the image as the fill
-  // rect.fills = [{ type: "IMAGE", scaleMode: "FILL", imageHash }];
   if (figma.currentPage.selection.length === 0) {
     // figma.notify('Nothing selected.');
     const rect = figma.createRectangle();
@@ -31,9 +27,7 @@ function addImageToCanvas({ width, height, data }) {
     figma.viewport.scrollAndZoomIntoView([rect]);
   }
 
-  // If current selection
-  // Copy the selected node array
-  // Apply the image as the fill
+  // If there's a selection
   for (const node of figma.currentPage.selection) {
     if ("fills" in node) {
       let fills = clone(node.fills);
