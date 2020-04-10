@@ -1,22 +1,23 @@
 <div id="error" class="notice"></div>
 
-<div class="input-icon">
-  <div class="input-icon__icon">
-    <div class="icon icon--search icon--black-3"></div>
+<div class="search">
+  <div class="input-icon">
+    <div class="input-icon__icon">
+      <div class="icon icon--search icon--black-3"></div>
+    </div>
+    <input
+      id="search"
+      type="search"
+      class="input-icon__input"
+      placeholder="Search for photos..."
+    />
   </div>
-  <input
-    id="search"
-    type="search"
-    class="input-icon__input"
-    value=""
-    placeholder="Search for images..."
-  />
 </div>
 
 <ul id="photos" class="gallery">
-  <!-- <li class="gallery__loading">
-    <p class="type type--pos-small-normal">Loading popular images...</p>
-  </li> -->
+  <li class="gallery__loading">
+    <p class="type type--pos-small-normal">Loading photos...</p>
+  </li>
 </ul>
 
 <div class="footer">

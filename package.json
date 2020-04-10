@@ -6,14 +6,12 @@
   "scripts": {
     "watch": "npx webpack --mode=development --watch",
     "build": "npx webpack --mode=production",
-    "api": "npx json-server --watch api/db.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Craig Dennis <craig@simplebitdesign.com>",
   "license": "ISC",
   "dependencies": {
     "figma-plugin-ds": "git+https://github.com/craigmdennis/figma-plugin-ds.git#add-package-json",
-    "imagesloaded": "^4.1.4",
     "lit-html": "^1.2.1",
     "pexels-api-wrapper": "^1.1.1"
   },
