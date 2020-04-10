@@ -110,6 +110,7 @@ figure {
   padding-right: 20px;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   background-clip: padding-box;
+  text-align: center;
 }
 
 #controls {
