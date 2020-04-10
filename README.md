@@ -1,3 +1,5 @@
+![](./assets/figma-cover.png)
+
 # Unofficial Pexels Figma Plugin
 
 A Figma plugin to insert photos from the popular free stock photography site Pexels.
