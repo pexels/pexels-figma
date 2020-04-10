@@ -1,5 +1,5 @@
 import { render } from "../node_modules/lit-html/lit-html";
-import PexelsAPI from "../node_modules/pexels-api-wrapper/index";
+import PexelsAPI from "./pexels-api-wrapper";
 import error from "./error-markup";
 import loading from "./loading-markup";
 import renderPhotos from "./render-photos";
