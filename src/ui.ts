@@ -1,6 +1,4 @@
-import "figma-plugin-ds/figma-plugin-ds.min.js";
 import "figma-plugin-ds/figma-plugin-ds.min.css";
-
 import insert from "./insert";
 import renderInitialPhotos from "./render-initial-photos";
 import renderSearchResults from "./render-search-results";

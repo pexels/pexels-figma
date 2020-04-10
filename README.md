@@ -1,6 +1,6 @@
 # Unofficial Pexels Figma Plugin
 
-Insert photos from the popular, free stock photography site, Pexels, into your designs.
+Insert photos from the popular free stock photography site Pexels.
 
 ## Development
 

@@ -1,10 +1,14 @@
 import { render } from "../node_modules/lit-html/lit-html";
 import error from "./error-markup";
+import loading from "./loading-markup";
 
 // Send the image to the node
 const insert = (event) => {
   // Check which image was clicked
   const url = event.path[0].dataset.insertUrl;
+
+  // Show a loading message
+  render(loading("Inserting Photo"), document.getElementById("notice"));
 
   // Get the dimentsion of the image
   const img = new Image();
@@ -28,6 +32,7 @@ const insert = (event) => {
           },
           "*"
         );
+        render([], document.getElementById("notice"));
       })
       .catch((err) => {
         render(error(err), document.getElementById("error"));
