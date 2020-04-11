@@ -36,7 +36,7 @@ const insert = (event) => {
             "*"
           );
           // Remove the loading notice
-          render([], photos);
+          render([], notice);
         })
         .catch((err) => {
           render(error(err), notice);
