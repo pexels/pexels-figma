@@ -13,6 +13,20 @@ html {
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: var(--figma-hud);
+  font-size: 100%;
+  line-height: 1.25;
+  text-align: left;
+  margin: 20px;
+  padding-top: 32px;
+  padding-bottom: 20px;
+  overflow-x: hidden;
+}
+
 a {
   color: var(--figma-blue);
   text-decoration: none;
@@ -21,16 +35,6 @@ a {
 a:hover,
 a:focus {
   text-decoration: underline;
-}
-
-body {
-  color: var(--figma-hud);
-  font: 12px sans-serif;
-  text-align: left;
-  margin: 20px;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  overflow-x: hidden;
 }
 
 figure {
@@ -66,16 +70,16 @@ figure {
   position: fixed;
   bottom: 60px;
   z-index: 99;
-  left: 50%;
   display: flex;
+  left: 20px;
+  right: 20px;
   justify-content: center;
-  transform: translateX(-50%);
-  max-width: 360px;
 }
 
 .visual-bell {
   height: auto !important;
   min-height: 36px;
+  width: auto !important;
 }
 
 .visual-bell__spinner-container {
@@ -101,6 +105,7 @@ figure {
 
 .footer {
   position: fixed;
+  color: #4d4d4d;
   bottom: 0;
   right: 0;
   left: 0;
@@ -120,4 +125,51 @@ figure {
 #controls > * {
   margin-bottom: 20px;
   margin-top: 20px;
+}
+:not(.gallery) .empty {
+  background: #f8f8f8;
+  color: black;
+  margin-left: -20px;
+  margin-right: -20px;
+  padding: 20px;
+  text-align: center;
+  letter-spacing: 0.005em;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+:not(.gallery) .empty__image {
+  height: auto;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 40px;
+  border-radius: 100%;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+:not(.gallery) .empty__image svg {
+  opacity: 0.1;
+  height: auto;
+  width: 64px;
+}
+
+.empty p {
+  opacity: 0.5;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.empty__title {
+  opacity: 0.75;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.empty__button {
+  margin-top: 40px;
 }

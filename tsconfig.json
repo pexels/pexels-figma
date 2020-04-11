@@ -3,9 +3,5 @@
     "target": "es6"
   },
   "downlevelIteration": true,
-  "lib": [
-    "dom",
-    "dom.iterable",
-    "esnext"
-  ],
+  "lib": ["dom", "dom.iterable", "esnext"]
 }

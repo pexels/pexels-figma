@@ -1,7 +1,7 @@
 import clone from "./clone";
 
 // Function that creates a rectangle on canvas with an image fill from image data
-function addImageToCanvas({ width, height, data }) {
+const addImageToCanvas = ({ width, height, data }) => {
   const imageHash = figma.createImage(data).hash;
 
   // If no selection
@@ -35,6 +35,6 @@ function addImageToCanvas({ width, height, data }) {
       node.fills = fills;
     }
   }
-}
+};
 
 export default addImageToCanvas;

@@ -1,16 +1,35 @@
-import { render } from "../node_modules/lit-html/lit-html";
+import { html, render } from "../node_modules/lit-html/lit-html";
 import image from "./image-markup";
-import error from "./error-markup";
+import emptyStateMarkup from "./empty-state-markup";
 import renderControls from "./render-controls";
+import renderCuratedPhotos from "./render-curated-photos";
 
 const renderPhotos = (result) => {
   let markup = [];
+  const photos = document.getElementById("photos");
+  const notice = document.getElementById("notice");
 
+  // If there are no results
   if (result.total_results === 0) {
+    // Remove the gallery class
+    photos.classList.remove("gallery");
+
+    // Render an empty state
+    render(emptyStateMarkup(), photos);
+
     // Remove any notices
-    // TODO Create an empty state
-    render(error("No results"), document.getElementById("notice"));
+    render([], notice);
+
+    // Set the
+    document.getElementById("curated").addEventListener("click", () => {
+      renderCuratedPhotos();
+    });
+
+    // If there are results
   } else {
+    // Add the gallery class
+    photos.classList.add("gallery");
+
     // Iterate through each photo
     for (const photo of result.photos) {
       // Add the image markup to the array for rendering
@@ -18,10 +37,10 @@ const renderPhotos = (result) => {
     }
 
     // Render the photos
-    render(markup, document.getElementById("photos"));
+    render(markup, photos);
 
     // Remove any notices
-    render([], document.getElementById("notice"));
+    render([], notice);
 
     // Render the pagination controls
     renderControls(result);

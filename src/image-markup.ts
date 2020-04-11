@@ -8,18 +8,16 @@ const imageMarkup = (
   height: number | string = "auto"
 ) => {
   return html`
-    <li class="gallery__image">
-      <figure>
-        <img
-          src="${src.tiny}"
-          alt="Photo by ${photographer}"
-          title="Photo by ${photographer}"
-          width="${width}"
-          height="${height}"
-          data-insert-url="${src.original}"
-        />
-      </figure>
-    </li>
+    <figure class="gallery__image">
+      <img
+        src="${src.tiny}"
+        alt="Photo by ${photographer}"
+        title="Photo by ${photographer}"
+        width="${width}"
+        height="${height}"
+        data-insert-url="${src.original}"
+      />
+    </figure>
   `;
 };
 

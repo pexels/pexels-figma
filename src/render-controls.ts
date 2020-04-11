@@ -1,5 +1,7 @@
 import { html, render } from "../node_modules/lit-html/lit-html";
 
+const controls = document.getElementById("controls");
+
 const renderControls = (result) => {
   // Calculate the next and previous page number
   const pages = (total_results, per_page, page) => {
@@ -31,15 +33,19 @@ const renderControls = (result) => {
       >
         Load more&hellip;
       </button>`,
-      document.getElementById("controls")
+      controls
     );
-  } else if (total_pages > 1) {
-    render(
-      html`<p class="type type--pos-small-normal">
-        There are no more results.
-      </p>`,
-      document.getElementById("controls")
-    );
+  } else {
+    // Only show the end of results message if there are more than
+    // one page of resutls.
+    if (result.total_pages > 1) {
+      render(
+        html`<p class="type type--pos-small-normal">
+          There are no more results.
+        </p>`,
+        controls
+      );
+    }
   }
 };
 
