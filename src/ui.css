@@ -103,6 +103,11 @@ figure {
   right: 4px;
 }
 
+.input-icon__input:active,
+.input-icon__input:focus {
+  width: calc(100% + 2px);
+}
+
 .footer {
   position: fixed;
   color: #4d4d4d;
