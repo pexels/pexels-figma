@@ -4,7 +4,7 @@ import emptyStateMarkup from "./empty-state-markup";
 import renderControls from "./render-controls";
 import renderCuratedPhotos from "./render-curated-photos";
 
-const renderPhotos = (result) => {
+const createGalleryPhotos = (result) => {
   let markup = [];
   const photos = document.getElementById("photos");
   const notice = document.getElementById("notice");
@@ -49,4 +49,4 @@ const renderPhotos = (result) => {
   return markup;
 };
 
-export default renderPhotos;
+export default createGalleryPhotos;

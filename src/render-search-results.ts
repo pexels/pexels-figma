@@ -2,19 +2,19 @@ import { render } from "../node_modules/lit-html/lit-html";
 import PexelsAPI from "./pexels-api-wrapper";
 import error from "./error-markup";
 import loading from "./loading-markup";
-import renderPhotos from "./render-photos";
+import createGalleryMarkup from "./create-gallery-markup";
 
 const pexelsClient = new PexelsAPI(process.env.API_KEY);
 const notice = document.getElementById("notice");
 const photos = document.getElementById("photos");
 const controls = document.getElementById("controls");
 
-const renderSearchResults = (event, page = 1, num = 20) => {
+const renderSearchResults = (page = 1, num = 20) => {
   const search = <HTMLInputElement>document.getElementById("search");
   const value = search.value;
 
-  // If it's an enter key press and the value isn't blank
-  if (event && event.keyCode == 13 && value != "") {
+  // If the value isn't blank
+  if (value != "") {
     // Remove the existing photos
     render([], photos);
 
@@ -26,7 +26,7 @@ const renderSearchResults = (event, page = 1, num = 20) => {
     // Search for photos
     pexelsClient
       .search(value, num, page)
-      .then(renderPhotos)
+      .then(createGalleryMarkup)
       .catch((err) => {
         render(error(err), notice);
       });

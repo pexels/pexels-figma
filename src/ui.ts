@@ -11,6 +11,8 @@ renderCuratedPhotos(20);
 // Event listeners and callbacks
 document.getElementById("photos").addEventListener("click", insert);
 document.getElementById("controls").addEventListener("click", controlActions);
-document
-  .getElementById("search")
-  .addEventListener("keyup", renderSearchResults);
+document.getElementById("search").addEventListener("keyup", (event) => {
+  if (event && event.keyCode == 13) {
+    renderSearchResults(1);
+  }
+});
