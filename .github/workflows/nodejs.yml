@@ -28,6 +28,12 @@ jobs:
         API_KEY: ${{ secrets.API_KEY }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOEKN }}
         
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: dist
+        path: dist
+        
     - name: Zip Files for Release
       uses: papeloto/action-zip@v1
       with:
