@@ -19,6 +19,7 @@
     "@babel/preset-env": "^7.9.5",
     "@types/node": "^13.11.1",
     "babel-loader": "^8.1.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
     "dotenv": "^8.2.0",
     "dotenv-webpack": "^1.7.0",
