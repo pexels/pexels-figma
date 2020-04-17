@@ -2,6 +2,8 @@
 
 # Unofficial Pexels Figma Plugin
 
+![Node.js CI](https://github.com/craigmdennis/figma-pexels/workflows/Node.js%20CI/badge.svg)
+
 A Figma plugin to insert photos from the popular free stock photography site Pexels.
 
 ## Build instructions
