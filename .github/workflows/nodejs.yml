@@ -34,15 +34,13 @@ jobs:
         name: dist
         path: dist
         
-    - name: Zip Files for Release
-      uses: papeloto/action-zip@v1
+    - name: Create Zip File
+      uses: montudor/action-zip@v0.1.0
       with:
-        files: manifest.json, dist/code.js, dist/ui.js, dist/ui.html
-        dest: pexels-figma-plugin.zip
+        args: zip -qq -r ./pexels-figma-plugin.zip ./dist
     
     - name: Create Release
       uses: ncipollo/release-action@v1.6.1
       with:
-        allowUpdates: true
         artifacts: pexels-figma-plugin.zip
         token: ${{ secrets.GITHUB_TOKEN }}
