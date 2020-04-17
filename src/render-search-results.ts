@@ -9,7 +9,7 @@ const notice = document.getElementById("notice");
 const photos = document.getElementById("photos");
 const controls = document.getElementById("controls");
 
-const renderSearchResults = (page = 1, num = 20) => {
+const renderSearchResults = (pageNmber = 1) => {
   const search = <HTMLInputElement>document.getElementById("search");
   const value = search.value;
 
@@ -25,7 +25,7 @@ const renderSearchResults = (page = 1, num = 20) => {
 
     // Search for photos
     pexelsClient
-      .search(value, num, page)
+      .search(value, 20, pageNmber)
       .then(createGalleryMarkup)
       .catch((err) => {
         render(error(err), notice);

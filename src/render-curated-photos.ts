@@ -8,10 +8,11 @@ const pexelsClient = new PexelsAPI(process.env.API_KEY);
 const notice = document.getElementById("notice");
 const search = <HTMLInputElement>document.getElementById("search");
 
-const renderInitialPhotos = (num: number = 20) => {
-  // Get a random page
-  const page = Math.round(Math.random() * 100);
+const randomPage = () => {
+  return Math.round(Math.random() * 100);
+};
 
+const renderCuratedPhotos = (pageNumber: number = randomPage()) => {
   // Focus and clear the input
   search.value = "";
   search.focus();
@@ -20,11 +21,11 @@ const renderInitialPhotos = (num: number = 20) => {
   render(loading(), notice);
   // Get a random curated photos page
   pexelsClient
-    .getCuratedPhotos(num, page)
+    .getCuratedPhotos(20, pageNumber)
     .then(createGalleryMarkup)
     .catch((err) => {
       render(error(err), notice);
     });
 };
 
-export default renderInitialPhotos;
+export default renderCuratedPhotos;

@@ -3,13 +3,15 @@ import renderSearchResults from "./render-search-results";
 
 const controlActions = (event) => {
   // Get the next number from the button and make it a number
-  const next = parseInt(document.getElementById(event.path[0].id).dataset.next);
+  const nextPageNumber = parseInt(
+    document.getElementById(event.path[0].id).dataset.next
+  );
 
   // Remove the next button when clicked
   render([], document.getElementById("notice"));
 
   // REnder new results
-  renderSearchResults(next);
+  renderSearchResults(nextPageNumber);
 };
 
 export default controlActions;
