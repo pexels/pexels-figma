@@ -1,6 +1,6 @@
 {
   "name": "figma-pexels",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "A Figma plugin to insert photos from the popular free stock photography site Pexels.",
   "main": "code.js",
   "scripts": {
@@ -21,8 +21,6 @@
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.4.2",
-    "dotenv": "^8.2.0",
-    "dotenv-webpack": "^1.7.0",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
