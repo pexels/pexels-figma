@@ -1,8 +1,17 @@
+const webpack = require("webpack");
 const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
-const Dotenv = require("dotenv-webpack");
+const isCiBuild = !!process.env.CI;
+let API_KEY;
+
+if (isCiBuild) {
+  API_KEY = process.env.API_KEY;
+} else {
+  const config = require("./secrets");
+  process.env.API_KEY = config.API_KEY;
+}
 
 module.exports = (env, argv) => ({
   mode: argv.mode === "production" ? "production" : "development",
@@ -50,6 +59,7 @@ module.exports = (env, argv) => ({
 
   // Tells Webpack to generate "ui.html" and to inline "ui.ts" into it
   plugins: [
+    new webpack.EnvironmentPlugin(["API_KEY"]),
     new CopyPlugin([{ from: "manifest.json", to: "manifest.json" }]),
     new HtmlWebpackPlugin({
       template: "./src/ui.html",
@@ -58,6 +68,5 @@ module.exports = (env, argv) => ({
       chunks: ["ui"],
     }),
     new HtmlWebpackInlineSourcePlugin(),
-    new Dotenv(),
   ],
 });
