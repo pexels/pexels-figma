@@ -1,6 +1,6 @@
 import { render } from "../node_modules/lit-html/lit-html";
-import error from "./error-markup";
-import loading from "./loading-markup";
+import error from "./templates/error";
+import loading from "./templates/loading";
 
 // Send the image to the node
 const insert = (event) => {

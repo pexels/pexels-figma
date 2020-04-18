@@ -1,4 +1,4 @@
-import { html } from "../node_modules/lit-html/lit-html";
+import { html } from "../../node_modules/lit-html/lit-html";
 
 // Error message markup
 const errorMarkup = (message: string = "There was an error.") => {

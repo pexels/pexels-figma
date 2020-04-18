@@ -1,4 +1,4 @@
-import addImageToCanvas from "./add-image-to-canvas";
+import addImageToCanvas from "./libs/add-image-to-canvas";
 
 // Show the plugin UI
 figma.showUI(__html__, { width: 400, height: 600 });

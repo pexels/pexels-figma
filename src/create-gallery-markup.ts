@@ -1,6 +1,6 @@
 import { html, render } from "../node_modules/lit-html/lit-html";
-import image from "./image-markup";
-import emptyStateMarkup from "./empty-state-markup";
+import image from "./templates/image";
+import emptyStateMarkup from "./templates/empty-state";
 import renderControls from "./render-controls";
 import renderCuratedPhotos from "./render-curated-photos";
 
@@ -9,6 +9,9 @@ const createGalleryPhotos = (result) => {
   const photos = document.getElementById("photos");
   const notice = document.getElementById("notice");
 
+  // Remove any notices
+  render([], notice);
+
   // If there are no results
   if (result.total_results === 0) {
     // Remove the gallery class
@@ -16,9 +19,6 @@ const createGalleryPhotos = (result) => {
 
     // Render an empty state
     render(emptyStateMarkup(), photos);
-
-    // Remove any notices
-    render([], notice);
 
     // Set the
     document.getElementById("curated").addEventListener("click", () => {
@@ -38,9 +38,6 @@ const createGalleryPhotos = (result) => {
 
     // Render the photos
     render(markup, photos);
-
-    // Remove any notices
-    render([], notice);
 
     // Render the pagination controls
     renderControls(result);

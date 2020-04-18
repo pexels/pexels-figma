@@ -1,4 +1,4 @@
-import { html } from "../node_modules/lit-html/lit-html";
+import { html } from "../../node_modules/lit-html/lit-html";
 
 const image = html`<svg viewBox="0 0 88 88" fill="currentColor">
   <g>

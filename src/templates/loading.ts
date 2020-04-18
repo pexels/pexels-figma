@@ -1,4 +1,4 @@
-import { html } from "../node_modules/lit-html/lit-html";
+import { html } from "../../node_modules/lit-html/lit-html";
 
 // The image markup to be rendered
 const loadingMarkup = (message = "Loading photos") => {

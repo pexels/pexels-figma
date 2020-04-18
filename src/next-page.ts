@@ -1,7 +1,7 @@
 import { render } from "../node_modules/lit-html/lit-html";
 import renderSearchResults from "./render-search-results";
 
-const controlActions = (event) => {
+const renderNextPage = (event) => {
   // Get the next number from the button and make it a number
   const nextPageNumber = parseInt(
     document.getElementById(event.path[0].id).dataset.next
@@ -14,4 +14,4 @@ const controlActions = (event) => {
   renderSearchResults(nextPageNumber);
 };
 
-export default controlActions;
+export default renderNextPage;

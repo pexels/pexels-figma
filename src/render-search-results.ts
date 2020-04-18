@@ -1,7 +1,7 @@
 import { render } from "../node_modules/lit-html/lit-html";
-import PexelsAPI from "./pexels-api-wrapper";
-import error from "./error-markup";
-import loading from "./loading-markup";
+import PexelsAPI from "./libs/pexels-api-wrapper";
+import error from "./templates/error";
+import loading from "./templates/loading";
 import createGalleryMarkup from "./create-gallery-markup";
 
 const pexelsClient = new PexelsAPI(process.env.API_KEY);
@@ -20,6 +20,7 @@ const renderSearchResults = (pageNmber = 1) => {
 
     // Remoe the controls in case it's the last page
     render([], controls);
+
     // Show a loading message
     render(loading(`Searching`), notice);
 
