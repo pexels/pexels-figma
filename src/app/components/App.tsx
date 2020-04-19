@@ -4,13 +4,17 @@ import '../styles/ui.css';
 import 'figma-plugin-ds/figma-plugin-ds.min.css';
 import Footer from './Footer';
 import SearchBar from './SearchBar';
-// import Gallery from './Gallery';
-import Notice from './Notice';
+import Gallery from './Gallery';
+// import Notice from './Notice';
 // import EmptyState from './EmptyState';
 
 const App = ({}) => {
-  const [images, setImages] = React.useState({total_results: 0});
+  // Define the state for the image gallery
+  const [images, setImages] = React.useState([]);
+
+  // DEfine the srate for the search term
   const [searchTerm, setSearchTerm] = React.useState('');
+
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
     // Search the Pexels API
@@ -25,7 +29,10 @@ const App = ({}) => {
       },
     });
 
-    setImages(response.data);
+    // Set the API response data to the image state
+    setImages(response.data.photos);
+
+    // Set the search term from the SearchBar to be used in App
     setSearchTerm(term);
   };
 
@@ -41,13 +48,10 @@ const App = ({}) => {
 
   return (
     <React.Fragment>
-      <Notice message="Loading&hellip;" loading={true} />
+      {/* <Notice message="Loading&hellip;" loading={true} /> */}
       <SearchBar userSubmit={onSearchSubmit} />
-      <span>
-        Found: {images.total_results} images for {searchTerm}.
-      </span>
       {/* <EmptyState /> */}
-      {/* <Gallery /> */}
+      <Gallery images={images} searchTerm={searchTerm} />
       <Footer />
     </React.Fragment>
   );
