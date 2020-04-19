@@ -1,6 +1,17 @@
+const webpack = require('webpack');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const isCiBuild = !!process.env.CI;
+let API_KEY;
+
+if (isCiBuild) {
+  API_KEY = process.env.API_KEY;
+} else {
+  const config = require('./secrets');
+  process.env.API_KEY = config.API_KEY;
+}
 
 module.exports = (env, argv) => ({
   mode: argv.mode === 'production' ? 'production' : 'development',
@@ -15,6 +26,16 @@ module.exports = (env, argv) => ({
 
   module: {
     rules: [
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
+      },
       // Converts TypeScript code to JavaScript
       {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
 
@@ -25,10 +46,7 @@ module.exports = (env, argv) => ({
       {test: /\.(png|jpg|gif|webp)$/, loader: [{loader: 'url-loader'}]},
 
       // Convert SVG to React components
-      {
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      },
+      {test: /\.svg$/, use: ['@svgr/webpack']},
     ],
   },
 
@@ -42,6 +60,8 @@ module.exports = (env, argv) => ({
 
   // Tells Webpack to generate "ui.html" and to inline "ui.ts" into it
   plugins: [
+    new webpack.EnvironmentPlugin(['API_KEY']),
+    new CopyPlugin([{from: 'manifest.json', to: 'manifest.json'}]),
     new HtmlWebpackPlugin({
       template: './src/app/index.html',
       filename: 'ui.html',

@@ -1,34 +1,38 @@
 import * as React from 'react';
 
 const SearchBar = () => {
-  const textbox = React.useRef<HTMLInputElement>(undefined);
+  // Set the state to an empty string
+  const [value, setValue] = React.useState('');
 
-  const searchRef = React.useCallback((element: HTMLInputElement) => {
-    textbox.current = element;
+  const onInputChange = React.useCallback((event) => {
+    setValue(event.target.value);
   }, []);
 
-  const onSearch = React.useCallback((event) => {
-    // Prevent the form from submitting
-    event.preventDefault();
+  const onSearchSubmit = React.useCallback(
+    (event) => {
+      // Prevent the form from submitting
+      event.preventDefault();
+      console.log(value);
 
-    // Get the value of the search term
-    const searchTerm = textbox.current.value;
-
-    // If the search term isn't empty
-    if (searchTerm !== '') {
-      parent.postMessage({pluginMessage: {type: 'search', searchTerm}}, '*');
-    }
-  }, []);
+      // If the search term isn't empty
+      if (value !== '') {
+        parent.postMessage({pluginMessage: {type: 'search', value}}, '*');
+      }
+    },
+    [value],
+  );
 
   return (
-    <form id="search-container" className="search" onSubmit={onSearch}>
+    <form id="search-container" className="search" onSubmit={onSearchSubmit}>
       <div className="input-icon">
         <div className="input-icon__icon">
           <div className="icon icon--search icon--black-3" />
         </div>
         <input
-          ref={searchRef}
+          // ref={searchRef}
           id="search"
+          value={value}
+          onChange={onInputChange}
           type="search"
           className="input-icon__input"
           placeholder="Type your search and hit return..."
