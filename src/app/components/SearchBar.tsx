@@ -16,11 +16,12 @@ const SearchBar = (props) => {
       // Prevent the form from submitting
       event.preventDefault();
 
-      // Send the value to the parent component
-      props.userSubmit(value);
-
       // If the search term isn't empty
       if (value !== '') {
+        // Send the value to the parent component
+        props.userSubmit(value);
+
+        // Sendthe value to Figma
         parent.postMessage({pluginMessage: {type: 'search', value}}, '*');
       }
     },

@@ -8,6 +8,14 @@ import Gallery from './Gallery';
 import EmptyState from './EmptyState';
 import Notice from './Notice';
 
+// Production API
+let api = 'https://api.pexels.com/v1/';
+
+// Development API
+// if (process.env.NODE_ENV === 'development') {
+//   api = 'http://localhost:3000/';
+// }
+
 const App = ({}) => {
   // Define the state for the image gallery
   const [images, setImages] = React.useState([]);
@@ -19,40 +27,45 @@ const App = ({}) => {
     isLoading: false,
   });
 
-  // DEfine the srate for the search term
+  // Define the srate for the search term
   const [searchTerm, setSearchTerm] = React.useState('');
 
+  const onError = (error) => {
+    setMessage({content: `Error: ${error.response.data.error}`, isError: true, isLoading: false});
+  };
+
+  const onSuccess = (response) => {
+    setImages(response.data.photos);
+  };
+
   // Render curated photos when the component initially renders
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     await axios.get('https://api.pexels.com/v1/curated', {
-  //       params: {
-  //         per_page: 30,
-  //         page: 1,
-  //       },
-  //       headers: {
-  //         Authorization: process.env.API_KEY,
-  //       },
-  //     });
-  //   };
+  // TODO: Try and abstract this to its own function and use it
+  // for both curated and search
+  React.useEffect(() => {
+    const fetchData = async () => {
+      return await axios.get(`${api}curated`, {
+        params: {
+          per_page: 30,
+          page: 1,
+        },
+        headers: {
+          Authorization: process.env.API_KEY,
+        },
+      });
+    };
 
-  //   fetchData()
-  //     .then((response) => {
-  //       console.log(response);
-
-  //       // Set the API response data to the image state
-  //       // setImages(response.data.photos);
-  //     })
-  //     .catch((error) => {
-  //       setMessage({content: error.response, isError: true, isLoading: false});
-  //     });
-  // }, []);
+    // TODO: Abstract this into an error/success function and use it
+    // for both this and search
+    fetchData()
+      .then(onSuccess)
+      .catch(onError);
+  }, []);
 
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
     // Search the Pexels API
     await axios
-      .get('https://api.pexels.com/v1/search', {
+      .get(`${api}search`, {
         params: {
           query: term,
           per_page: 30,
@@ -62,33 +75,18 @@ const App = ({}) => {
           Authorization: process.env.API_KEY,
         },
       })
-      .then((response) => {
-        setImages(response.data.photos);
-      })
-      .catch((error) => {
-        console.log(error.response.data.error);
-        setMessage({content: `Error: ${error.response.data.error}`, isError: true, isLoading: false});
-      });
+      .then(onSuccess)
+      .catch(onError);
 
     // Set the search term from the SearchBar to be used in App
     setSearchTerm(term);
   };
 
-  // React.useEffect(() => {
-  //   // This is how we read messages sent from the plugin controller
-  //   window.onmessage = (event) => {
-  //     const {type, message} = event.data.pluginMessage;
-  //     if (type === 'insert') {
-  //       console.log(`Figma Says: ${message}`);
-  //     }
-  //   };
-  // }, []);
-
   return (
     <React.Fragment>
       {message.content && <Notice content={message.content} isError={message.isError} isLoading={message.isLoading} />}
       <SearchBar userSubmit={onSearchSubmit} />
-      {images.length ? <Gallery images={images} /> : <EmptyState searchTerm={searchTerm} />}
+      {images.length ? <Gallery images={images} error={onError} /> : <EmptyState searchTerm={searchTerm} />}
       <Footer />
     </React.Fragment>
   );

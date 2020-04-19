@@ -37,11 +37,5 @@ figma.ui.onmessage = ({type, width, height, data}) => {
         node.fills = fills;
       }
     }
-
-    // Send a message back to the UI
-    figma.ui.postMessage({
-      type: 'create-rectangles',
-      message: `Inserted a ${width}x${height} image.`,
-    });
   }
 };
