@@ -18,13 +18,13 @@ body {
   font-weight: 400;
   letter-spacing: 0.005em;
   color: var(--figma-hud);
+  padding: 0;
+  margin: 0;
   font-size: 100%;
   line-height: 1.25;
   text-align: left;
-  margin: 20px;
-  padding-top: 32px;
-  padding-bottom: 20px;
-  overflow-x: hidden;
+  overflow: hidden;
+  height: 100vh;
 }
 
 a {
@@ -44,21 +44,27 @@ figure {
 }
 
 .gallery {
-  margin: 0 -21px;
+  margin: -1px 0;
   padding: 0;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
 }
 
 .gallery__image {
   display: block;
-  opacity: 0.9;
   cursor: pointer;
 }
 
-.gallery__image:hover {
+.gallery__image > img {
+  opacity: 0.9;
+}
+
+.gallery__image:hover > img {
   opacity: 1;
 }
 
@@ -89,10 +95,6 @@ figure {
 .search {
   margin-bottom: 0;
   padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   background-color: white;
   z-index: 99;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -110,11 +112,7 @@ figure {
 }
 
 .footer {
-  position: fixed;
   color: #4d4d4d;
-  bottom: 0;
-  right: 0;
-  left: 0;
   height: 40px;
   background: white;
   padding-left: 20px;
@@ -122,6 +120,13 @@ figure {
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   background-clip: padding-box;
   text-align: center;
+  z-index: 99;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  flex-flow: column;
 }
 
 #controls {
