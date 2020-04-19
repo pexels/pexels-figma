@@ -5,8 +5,8 @@ import 'figma-plugin-ds/figma-plugin-ds.min.css';
 import Footer from './Footer';
 import SearchBar from './SearchBar';
 import Gallery from './Gallery';
+import EmptyState from './EmptyState';
 // import Notice from './Notice';
-// import EmptyState from './EmptyState';
 
 const App = ({}) => {
   // Define the state for the image gallery
@@ -50,8 +50,7 @@ const App = ({}) => {
     <React.Fragment>
       {/* <Notice message="Loading&hellip;" loading={true} /> */}
       <SearchBar userSubmit={onSearchSubmit} />
-      {/* <EmptyState /> */}
-      <Gallery images={images} searchTerm={searchTerm} />
+      {images.length ? <Gallery images={images} /> : <EmptyState searchTerm={searchTerm} />}
       <Footer />
     </React.Fragment>
   );
