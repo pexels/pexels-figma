@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    // "target": "es6",
     "outDir": "dist",
     "jsx": "react",
     "noUnusedLocals": true,
@@ -12,5 +12,5 @@
   },
   "downlevelIteration": true,
   "lib": ["dom", "dom.iterable", "esnext"],
-  "files": ["custom.d.ts", "figma.d.ts"]
+  "files": ["figma.d.ts", "custom.d.ts"]
 }

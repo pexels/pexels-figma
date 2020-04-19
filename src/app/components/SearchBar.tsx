@@ -1,18 +1,23 @@
 import * as React from 'react';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   // Set the state to an empty string
   const [value, setValue] = React.useState('');
 
+  // Needs an change event handler or the input is readobnly
   const onInputChange = React.useCallback((event) => {
     setValue(event.target.value);
   }, []);
 
+  // Use useCallback to optimize child re-rendering
+  // Need to pass the properties in the array at the end of the function
   const onSearchSubmit = React.useCallback(
     (event) => {
       // Prevent the form from submitting
       event.preventDefault();
-      console.log(value);
+
+      // Send the value to the parent component
+      props.userSubmit(value);
 
       // If the search term isn't empty
       if (value !== '') {
