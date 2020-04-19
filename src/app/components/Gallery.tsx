@@ -10,6 +10,10 @@ const Gallery = (props) => {
     // Get the dimentsion of the image
     const img = new Image();
 
+<<<<<<< HEAD
+=======
+    // Load the image
+>>>>>>> Show curated images on load and hook up image insertion
     img.onload = () => {
       // Fetch the image
       fetch(insertURL)
@@ -35,6 +39,8 @@ const Gallery = (props) => {
           props.error(error);
         });
     };
+
+    // Asign the src to the image which shows it
     img.src = insertURL;
   }, []);
 
