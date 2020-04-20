@@ -38,7 +38,11 @@ const App = ({}) => {
     setImages(response.data.photos);
   };
 
-  // Render curated photos when the component initially renders
+  const randomPage = (multiplier: number = 100) => {
+    return Math.round(Math.random() * multiplier);
+  };
+
+  // Render curated photos when the component is initiated
   // TODO: Try and abstract this to its own function and use it
   // for both curated and search
   React.useEffect(() => {
@@ -46,7 +50,7 @@ const App = ({}) => {
       return await axios.get(`${api}curated`, {
         params: {
           per_page: 30,
-          page: 1,
+          page: randomPage(),
         },
         headers: {
           Authorization: process.env.API_KEY,
