@@ -20,6 +20,11 @@ const App = ({}) => {
   // Define the state for the image gallery
   const [images, setImages] = React.useState([]);
 
+  // Define state for infinite scroll
+  // const [infiniteSCroll] = React.useState({
+
+  // })
+
   // Define the state for error & loading messages
   const [message, setMessage] = React.useState({
     content: '',
@@ -35,6 +40,7 @@ const App = ({}) => {
   };
 
   const onSuccess = (response) => {
+    console.log(response);
     setImages(response.data.photos);
   };
 
@@ -90,7 +96,7 @@ const App = ({}) => {
     <React.Fragment>
       {message.content && <Notice content={message.content} isError={message.isError} isLoading={message.isLoading} />}
       <SearchBar userSubmit={onSearchSubmit} />
-      {images.length ? <Gallery images={images} error={onError} /> : <EmptyState searchTerm={searchTerm} />}
+      {images.length ? <Gallery images={images} onError={onError} /> : <EmptyState searchTerm={searchTerm} />}
       <Footer />
     </React.Fragment>
   );
