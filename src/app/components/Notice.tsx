@@ -1,22 +1,23 @@
 import * as React from 'react';
 
-const Notice = (props) => {
-  // Destructure props
-  const {content, isLoading, isError} = props;
-
+const Notice = ({content, isError, showSpinner}) => {
   // Loading spinner
-  const renderSpinner = () => {
-    return (
-      <div className="visual-bell__spinner-container">
-        <span className="visual-bell__spinner" />
-      </div>
-    );
+  const Spinner = () => {
+    if (showSpinner) {
+      return (
+        <div className="visual-bell__spinner-container">
+          <span className="visual-bell__spinner" />
+        </div>
+      );
+    } else {
+      return null;
+    }
   };
 
   return (
     <div id="notice" className="notice">
       <div className={`visual-bell ${isError ? 'visual-bell--error' : ''}`}>
-        {isLoading && renderSpinner}
+        <Spinner />
         <span className="visual-bell__msg">{content}</span>
       </div>
     </div>

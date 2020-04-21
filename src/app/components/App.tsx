@@ -21,31 +21,33 @@ const App = ({}) => {
   // Define the state for the image gallery
   const [images, setImages] = React.useState([]);
 
-  // Define state for infinite scroll
-  // const [infiniteScroll, setInfiniteScroll] = React.useState({
+  // Set the state for page isLoading
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  // })
-
-  // Set the state for page loading
-  const [loading, setLoading] = React.useState(false);
-
-  // Define the state for error & loading messages
+  // Define the state for error & isLoading messages
   const [message, setMessage] = React.useState({
     content: '',
     isError: false,
-    isLoading: false,
+    showSpinner: false,
   });
 
   // Define the srate for the search term
   const [searchTerm, setSearchTerm] = React.useState('');
 
-  const onError = (error) => {
-    setMessage({content: `Error: ${error.response.data.error}`, isError: true, isLoading: false});
+  // Abstracted insertion function
+  const onInsert = ({content, isError, showSpinner}) => {
+    setMessage({content, isError, showSpinner});
   };
 
+  // Abstracted error function
+  const onError = (error) => {
+    setMessage({content: `Error: ${error.response.data.error}`, isError: true, showSpinner: false});
+  };
+
+  // Abstracted success function
   const onSuccess = (response) => {
     setImages(response.data.photos);
-    setLoading(true);
+    setIsLoading(true);
   };
 
   const randomPage = (multiplier: number = 100) => {
@@ -75,7 +77,7 @@ const App = ({}) => {
 
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
-    setLoading(false);
+    setIsLoading(false);
     // Search the Pexels API
     await axios
       .get(`${api}search`, {
@@ -97,19 +99,25 @@ const App = ({}) => {
 
   // Determine what content to show
   const Content = () => {
-    // IF the loading state is false
-    if (loading === false) {
+    // If the isLoading state is false
+    if (isLoading === false) {
       return <LoadingState />;
+
+      // If there are no images
     } else if (!images.length) {
       return <EmptyState searchTerm={searchTerm} />;
+
+      // Otherwise show the image gallery
     } else {
-      return <Gallery images={images} onError={onError} />;
+      return <Gallery images={images} onError={onError} onInsert={onInsert} />;
     }
   };
 
   return (
     <React.Fragment>
-      {message.content && <Notice content={message.content} isError={message.isError} isLoading={message.isLoading} />}
+      {message.content && (
+        <Notice content={message.content} isError={message.isError} showSpinner={message.showSpinner} />
+      )}
       <SearchBar userSubmit={onSearchSubmit} />
       <Content />
       <Footer />

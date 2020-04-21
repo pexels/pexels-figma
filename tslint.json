@@ -15,7 +15,8 @@
     "no-trailing-whitespace": false,
     "no-console": false,
     "jsx-wrap-multiline": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "jsx-no-multiline-js": false
   },
   "rulesDirectory": []
 }
