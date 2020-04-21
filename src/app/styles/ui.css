@@ -58,18 +58,79 @@ figure {
 .gallery__image {
   display: block;
   cursor: pointer;
+  position: relative;
+}
+
+.gallery__image:before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
 }
 
 .gallery__image > img {
   opacity: 0.9;
+  transition: opacity 0.2s;
 }
 
-.gallery__image:hover > img {
+.gallery__image:hover > img,
+.gallery__image:hover > .gallery__overlay,
+.gallery__image:hover:before {
   opacity: 1;
 }
 
 .gallery__image > img {
   object-fit: cover;
+}
+
+.gallery__overlay {
+  transition: opacity 0.2s;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 12px;
+}
+
+.gallery__photographer {
+  color: white;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11.5px;
+  line-height: 16px;
+  letter-spacing: 0.005em;
+  display: inline-block;
+  max-width: calc(100% - 24px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 4px;
+  user-select: none;
+}
+
+/* .gallery__photographer:hover,
+.gallery__photographer:focus {
+  text-decoration: none;
+} */
+
+.gallery__overlay > svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  position: relative;
+  top: 1px;
 }
 
 .notice {
@@ -183,4 +244,55 @@ figure {
 
 .empty__button {
   margin-top: 40px;
+}
+
+.loading {
+  margin: -1px 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  flex: 1;
+  position: relative;
+}
+
+.loading:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 75%);
+  content: '';
+}
+
+.loading > .placeholder {
+  background-color: #f2f2f2;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading > .placeholder:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  animation: shimmer 2s infinite;
+  content: '';
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }

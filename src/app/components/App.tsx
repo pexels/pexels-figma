@@ -6,6 +6,7 @@ import Footer from './Footer';
 import SearchBar from './SearchBar';
 import Gallery from './Gallery';
 import EmptyState from './EmptyState';
+import LoadingState from './LoadingState';
 import Notice from './Notice';
 
 // Production API
@@ -25,6 +26,8 @@ const App = ({}) => {
 
   // })
 
+  const [loading, setLoading] = React.useState(false);
+
   // Define the state for error & loading messages
   const [message, setMessage] = React.useState({
     content: '',
@@ -40,8 +43,8 @@ const App = ({}) => {
   };
 
   const onSuccess = (response) => {
-    console.log(response);
     setImages(response.data.photos);
+    setLoading(true);
   };
 
   const randomPage = (multiplier: number = 100) => {
@@ -64,8 +67,6 @@ const App = ({}) => {
       });
     };
 
-    // TODO: Abstract this into an error/success function and use it
-    // for both this and search
     fetchData()
       .then(onSuccess)
       .catch(onError);
@@ -73,6 +74,7 @@ const App = ({}) => {
 
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
+    setLoading(false);
     // Search the Pexels API
     await axios
       .get(`${api}search`, {
@@ -92,11 +94,26 @@ const App = ({}) => {
     setSearchTerm(term);
   };
 
+  // Determine what content to show
+  const Content = () => {
+    // IF the loading state is false
+    if (loading === false) {
+      return <LoadingState />;
+    } else {
+      // If the imaages state has some images
+      if (images.length) {
+        return <Gallery images={images} onError={onError} />;
+      } else {
+        return <EmptyState searchTerm={searchTerm} />;
+      }
+    }
+  };
+
   return (
     <React.Fragment>
       {message.content && <Notice content={message.content} isError={message.isError} isLoading={message.isLoading} />}
       <SearchBar userSubmit={onSearchSubmit} />
-      {images.length ? <Gallery images={images} onError={onError} /> : <EmptyState searchTerm={searchTerm} />}
+      <Content />
       <Footer />
     </React.Fragment>
   );

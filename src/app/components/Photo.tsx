@@ -1,4 +1,5 @@
 import * as React from 'react';
+import IconCamera from '../assets/icon-camera.svg';
 
 const Photo = (props) => {
   const {photo} = props;
@@ -50,6 +51,16 @@ const Photo = (props) => {
         width={199}
         height={140}
       />
+      <div className="gallery__overlay">
+        <IconCamera />
+        <a
+          title={`Visit ${photo.photographer} on Pexels`}
+          target="_blank"
+          className="gallery__photographer"
+          href={photo.photographer_url}>
+          {photo.photographer}
+        </a>
+      </div>
     </figure>
   );
 };
