@@ -22,10 +22,11 @@ const App = ({}) => {
   const [images, setImages] = React.useState([]);
 
   // Define state for infinite scroll
-  // const [infiniteSCroll] = React.useState({
+  // const [infiniteScroll, setInfiniteScroll] = React.useState({
 
   // })
 
+  // Set the state for page loading
   const [loading, setLoading] = React.useState(false);
 
   // Define the state for error & loading messages
@@ -99,13 +100,10 @@ const App = ({}) => {
     // IF the loading state is false
     if (loading === false) {
       return <LoadingState />;
+    } else if (!images.length) {
+      return <EmptyState searchTerm={searchTerm} />;
     } else {
-      // If the imaages state has some images
-      if (images.length) {
-        return <Gallery images={images} onError={onError} />;
-      } else {
-        return <EmptyState searchTerm={searchTerm} />;
-      }
+      return <Gallery images={images} onError={onError} />;
     }
   };
 

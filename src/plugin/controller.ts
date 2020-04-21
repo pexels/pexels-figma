@@ -2,9 +2,14 @@ import clone from './clone';
 
 figma.showUI(__html__, {width: 400, height: 600});
 
-figma.ui.onmessage = ({type, width, height, data}) => {
+figma.ui.onmessage = (event) => {
+  const {type, message} = event;
+  if (type === 'notice') {
+    figma.notify(message.text);
+  }
+
   if (type === 'imageHash') {
-    const imageHash = figma.createImage(data).hash;
+    const imageHash = figma.createImage(message.data).hash;
 
     // If no selection
     if (figma.currentPage.selection.length === 0) {
@@ -12,11 +17,11 @@ figma.ui.onmessage = ({type, width, height, data}) => {
       const rect = figma.createRectangle();
 
       // Halfthe soze of the image so it looks good on retina
-      rect.resizeWithoutConstraints(width / 2, height / 2);
+      rect.resizeWithoutConstraints(message.width / 2, message.height / 2);
 
       // Center the frame in our current viewport so we can see it.
-      rect.x = figma.viewport.center.x - width / 2;
-      rect.y = figma.viewport.center.y - height / 2;
+      rect.x = figma.viewport.center.x - message.width / 2;
+      rect.y = figma.viewport.center.y - message.height / 2;
 
       // Use FILL so it can be resized
       rect.fills = [{type: 'IMAGE', scaleMode: 'FILL', imageHash}];

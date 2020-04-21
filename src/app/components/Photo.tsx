@@ -3,9 +3,25 @@ import IconCamera from '../assets/icon-camera.svg';
 
 const Photo = (props) => {
   const {photo} = props;
+
+  // Create the photo in figma
   const onCreate = React.useCallback(() => {
+    // Let Figma know that an image is being inserted
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'notice',
+          message: {
+            text: `Inserting image from ${photo.photographer}`,
+          },
+        },
+      },
+      '*',
+    );
+
     // Get the clicked image
     const clickedImage = event.srcElement as HTMLImageElement;
+
     // Get the original URL stored as a data attribute
     const insertURL = clickedImage.dataset.insertUrl;
 
@@ -23,15 +39,15 @@ const Photo = (props) => {
             {
               pluginMessage: {
                 type: 'imageHash',
-                data: new Uint8Array(buffer),
-                width: img.naturalWidth,
-                height: img.naturalHeight,
+                message: {
+                  data: new Uint8Array(buffer),
+                  width: img.naturalWidth,
+                  height: img.naturalHeight,
+                },
               },
             },
             '*',
           );
-          // Remove the loading notice
-          // Send the value to the parent component
         })
         .catch(props.onError);
     };

@@ -11,6 +11,5 @@
     "moduleResolution": "node"
   },
   "downlevelIteration": true,
-  "lib": ["dom", "dom.iterable", "esnext"],
-  "files": ["figma.d.ts", "custom.d.ts"]
+  "lib": ["dom", "dom.iterable", "esnext"]
 }
