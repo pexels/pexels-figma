@@ -5,7 +5,7 @@ const Photo = (props) => {
   const {photo, width = 199, height = 140} = props;
 
   // Create the photo in figma
-  const onCreate = React.useCallback(() => {
+  const handleClickedPhoto = React.useCallback(() => {
     // Pass the message to the parent to display a notice
     props.onInsert({content: `Inserting Photo`, isError: false, showSpinner: true});
 
@@ -40,7 +40,7 @@ const Photo = (props) => {
   return (
     <figure className="gallery__image">
       <img
-        onClick={onCreate}
+        onClick={handleClickedPhoto}
         src={photo.src.tiny}
         alt={`Photo by ${photo.photographer}`}
         title={`Photo by ${photo.photographer}`}

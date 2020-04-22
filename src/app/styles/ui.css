@@ -59,6 +59,7 @@ figure {
   display: block;
   cursor: pointer;
   position: relative;
+  background-color: #f2f2f2;
 }
 
 .gallery__image:before {
@@ -198,7 +199,7 @@ figure {
   margin-bottom: 20px;
   margin-top: 20px;
 }
-:not(.gallery) .empty {
+.empty {
   background: #f8f8f8;
   color: black;
   margin-left: -20px;
@@ -212,7 +213,7 @@ figure {
   align-items: center;
 }
 
-:not(.gallery) .empty__image {
+.empty__image {
   height: auto;
   background: rgba(0, 0, 0, 0.05);
   padding: 40px;
@@ -221,10 +222,10 @@ figure {
   margin-top: 40px;
 }
 
-:not(.gallery) .empty__image svg {
+.empty__image svg {
   opacity: 0.1;
   height: auto;
-  width: 64px;
+  width: 56px;
 }
 
 .empty p {
@@ -243,56 +244,5 @@ figure {
 }
 
 .empty__button {
-  margin-top: 40px;
-}
-
-.loading {
-  margin: -1px 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2px;
-  flex: 1;
-  position: relative;
-}
-
-.loading:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 1) 75%);
-  content: '';
-}
-
-.loading > .placeholder {
-  background-color: #f2f2f2;
-  overflow: hidden;
-  position: relative;
-}
-
-.loading > .placeholder:after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transform: translateX(-100%);
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0.5) 60%,
-    rgba(255, 255, 255, 0)
-  );
-  animation: shimmer 2s infinite;
-  content: '';
-}
-
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+  margin-top: 40px !important;
 }

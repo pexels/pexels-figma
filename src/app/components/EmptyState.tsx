@@ -8,9 +8,11 @@ const EmptyState = (props) => {
         <IconPhotos />
       </div>
       <h1 className="empty__title">No Results</h1>
-      <p>No photos matched {props.searchTerm}.</p>
+      <p>
+        No photos matched "<span>{props.searchTerm}</span>".
+      </p>
       <p>Please try another search term.</p>
-      <button id="curated" className="button button--secondary empty__button">
+      <button onClick={props.onClick} id="curated" className="button button--secondary empty__button">
         Show Curated Photos
       </button>
     </div>

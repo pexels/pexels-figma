@@ -6,7 +6,6 @@ import Footer from './Footer';
 import SearchBar from './SearchBar';
 import Gallery from './Gallery';
 import EmptyState from './EmptyState';
-import LoadingState from './LoadingState';
 import Notice from './Notice';
 
 // Production API
@@ -21,10 +20,10 @@ const App = ({}) => {
   // Define the state for the image gallery
   const [images, setImages] = React.useState([]);
 
-  // Set the state for page isLoading
-  const [isLoading, setIsLoading] = React.useState(false);
+  // Set the state for when the page is loading
+  const [pageIsLoading, setPageIsLoading] = React.useState(false);
 
-  // Define the state for error & isLoading messages
+  // Define the state for UI notices
   const [message, setMessage] = React.useState({
     content: '',
     isError: false,
@@ -35,50 +34,57 @@ const App = ({}) => {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   // Abstracted insertion function
-  const onInsert = ({content, isError, showSpinner}) => {
+  const handlePhotoInserted = ({content, isError, showSpinner}) => {
     setMessage({content, isError, showSpinner});
   };
 
   // Abstracted error function
-  const onError = (error) => {
+  const handleError = (error) => {
     setMessage({content: `Error: ${error.response.data.error}`, isError: true, showSpinner: false});
   };
 
   // Abstracted success function
-  const onSuccess = (response) => {
+  const handleImagesFetched = (response) => {
+    setPageIsLoading(true);
     setImages(response.data.photos);
-    setIsLoading(true);
   };
 
+  // Abstracted function to fetch and show photos
+  const showCurated = () => {
+    setPageIsLoading(false);
+    fetchData()
+      .then(handleImagesFetched)
+      .catch(handleError);
+  };
+
+  // Generate a random number
+  // Used for random curated photos page
   const randomPage = (multiplier: number = 100) => {
     return Math.round(Math.random() * multiplier);
   };
 
-  // Render curated photos when the component is initiated
-  // TODO: Try and abstract this to its own function and use it
-  // for both curated and search
-  React.useEffect(() => {
-    const fetchData = async () => {
-      return await axios.get(`${api}curated`, {
-        params: {
-          per_page: 30,
-          page: randomPage(),
-        },
-        headers: {
-          Authorization: process.env.API_KEY,
-        },
-      });
-    };
-
-    fetchData()
-      .then(onSuccess)
-      .catch(onError);
-  }, []);
+  // Core fetch function querying Pexels APi
+  // TODO: Abstract this to a utility function
+  const fetchData = async () => {
+    return await axios.get(`${api}curated`, {
+      params: {
+        per_page: 30,
+        page: randomPage(),
+      },
+      headers: {
+        Authorization: process.env.API_KEY,
+      },
+    });
+  };
 
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
-    setIsLoading(false);
+    setPageIsLoading(false);
+    // Set the search term from the SearchBar to be used in App
+    setSearchTerm(term);
+
     // Search the Pexels API
+    // TODO: Use the fetch() function above
     await axios
       .get(`${api}search`, {
         params: {
@@ -90,26 +96,22 @@ const App = ({}) => {
           Authorization: process.env.API_KEY,
         },
       })
-      .then(onSuccess)
-      .catch(onError);
-
-    // Set the search term from the SearchBar to be used in App
-    setSearchTerm(term);
+      .then(handleImagesFetched)
+      .catch(handleError);
   };
+
+  // Equivalent to componentDidMount()
+  React.useEffect(showCurated, []);
 
   // Determine what content to show
   const Content = () => {
     // If the isLoading state is false
-    if (isLoading === false) {
-      return <LoadingState />;
-
-      // If there are no images
-    } else if (!images.length) {
-      return <EmptyState searchTerm={searchTerm} />;
+    if (pageIsLoading === true && !images.length) {
+      return <EmptyState searchTerm={searchTerm} onClick={showCurated} />;
 
       // Otherwise show the image gallery
     } else {
-      return <Gallery images={images} onError={onError} onInsert={onInsert} />;
+      return <Gallery images={images} onError={handleError} onInsert={handlePhotoInserted} />;
     }
   };
 
