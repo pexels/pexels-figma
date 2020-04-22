@@ -1,8 +1,14 @@
 import * as React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import IconCamera from '../assets/icon-camera.svg';
 
 const Photo = (props) => {
   const {photo, width = 199, height = 140} = props;
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
+  const handleImageLoaded = () => {
+    setImageLoaded(true);
+  };
 
   // Create the photo in figma
   const handleClickedPhoto = React.useCallback(() => {
@@ -37,28 +43,33 @@ const Photo = (props) => {
       .catch(props.onError);
   }, []);
 
+  // If the image hasn't loaded then show an empty state
   return (
-    <figure className="gallery__image">
-      <img
-        onClick={handleClickedPhoto}
-        src={photo.src.tiny}
-        alt={`Photo by ${photo.photographer}`}
-        title={`Photo by ${photo.photographer}`}
-        data-insert-url={photo.src.original}
-        width={width}
-        height={height}
-      />
-      <div className="gallery__overlay">
-        <IconCamera />
-        <a
-          title={`Visit ${photo.photographer} on Pexels`}
-          target="_blank"
-          className="gallery__photographer"
-          href={photo.photographer_url}>
-          {photo.photographer}
-        </a>
-      </div>
-    </figure>
+    <React.Fragment>
+      {!imageLoaded && <Skeleton height={height} />}
+      <figure className={`gallery__image ${imageLoaded ? 'is-loaded' : ''}`}>
+        <img
+          onLoad={handleImageLoaded}
+          onClick={handleClickedPhoto}
+          src={photo.src.tiny}
+          alt={`Photo by ${photo.photographer}`}
+          title={`Photo by ${photo.photographer}`}
+          data-insert-url={photo.src.original}
+          width={width}
+          height={height}
+        />
+        <div className="gallery__overlay">
+          <IconCamera />
+          <a
+            title={`Visit ${photo.photographer} on Pexels`}
+            target="_blank"
+            className="gallery__photographer"
+            href={photo.photographer_url}>
+            {photo.photographer}
+          </a>
+        </div>
+      </figure>
+    </React.Fragment>
   );
 };
 

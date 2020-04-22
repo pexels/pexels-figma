@@ -43,23 +43,51 @@ figure {
   padding: 0;
 }
 
-.gallery {
+.gallery,
+.skeleton > span {
   margin: -1px 0;
   padding: 0;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2px;
-  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   flex: 1;
 }
 
+.gallery {
+  overflow-y: auto;
+}
+
+.react-loading-skeleton {
+  border-radius: 0 !important;
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+}
+
+/* .skeleton:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, transparent 100%);
+  content: '';
+} */
+
 .gallery__image {
-  display: block;
   cursor: pointer;
   position: relative;
   background-color: #f2f2f2;
+  display: none;
+}
+
+.gallery__image.is-loaded {
+  display: block;
 }
 
 .gallery__image:before {
@@ -120,11 +148,6 @@ figure {
   margin-left: 4px;
   user-select: none;
 }
-
-/* .gallery__photographer:hover,
-.gallery__photographer:focus {
-  text-decoration: none;
-} */
 
 .gallery__overlay > svg {
   width: 16px;

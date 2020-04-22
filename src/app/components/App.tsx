@@ -79,7 +79,11 @@ const App = ({}) => {
 
   // When the SearchBar for is submitted
   const onSearchSubmit = async (term) => {
-    setPageIsLoading(false);
+    setPageIsLoading(true);
+
+    // Remove existing images
+    setImages([]);
+
     // Set the search term from the SearchBar to be used in App
     setSearchTerm(term);
 
@@ -105,12 +109,11 @@ const App = ({}) => {
 
   // Determine what content to show
   const Content = () => {
-    // If the isLoading state is false
-    if (pageIsLoading === true && !images.length) {
+    if (pageIsLoading === false && images.length) {
+      // If the page isn't loading and there are no images retrived, show the empty state
       return <EmptyState searchTerm={searchTerm} onClick={showCurated} />;
-
-      // Otherwise show the image gallery
     } else {
+      // Otherwise show the image gallery
       return <Gallery images={images} onError={handleError} onInsert={handlePhotoInserted} />;
     }
   };
