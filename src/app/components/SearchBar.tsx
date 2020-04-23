@@ -11,6 +11,7 @@ const SearchBar = (props) => {
 
   // Use useCallback to optimize child re-rendering
   // Need to pass the properties in the array at the end of the function
+  // to only run when they change
   const onSearchSubmit = React.useCallback(
     (event) => {
       // Prevent the form from submitting
@@ -19,10 +20,7 @@ const SearchBar = (props) => {
       // If the search term isn't empty
       if (value !== '') {
         // Send the value to the parent component
-        props.userSubmit(value);
-
-        // Sendthe value to Figma
-        parent.postMessage({pluginMessage: {type: 'search', value}}, '*');
+        props.onUserSubmit(value);
       }
     },
     [value],
@@ -35,7 +33,6 @@ const SearchBar = (props) => {
           <div className="icon icon--search icon--black-3" />
         </div>
         <input
-          // ref={searchRef}
           id="search"
           value={value}
           onChange={onInputChange}

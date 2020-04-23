@@ -6,6 +6,7 @@ const Photo = (props) => {
   const {photo, width = 199, height = 140} = props;
   const [imageLoaded, setImageLoaded] = React.useState(false);
 
+  // Update the state when the image has loaded
   const handleImageLoaded = () => {
     setImageLoaded(true);
   };
@@ -47,7 +48,7 @@ const Photo = (props) => {
   return (
     <React.Fragment>
       {!imageLoaded && <Skeleton height={height} />}
-      <figure className={`gallery__image ${imageLoaded ? 'is-loaded' : ''}`}>
+      <figure style={{height}} className={`gallery__image ${imageLoaded ? 'is-loaded' : ''}`}>
         <img
           onLoad={handleImageLoaded}
           onClick={handleClickedPhoto}

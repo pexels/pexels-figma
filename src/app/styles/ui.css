@@ -43,6 +43,16 @@ figure {
   padding: 0;
 }
 
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}
+
 .gallery,
 .skeleton > span {
   margin: -1px 0;
@@ -50,6 +60,7 @@ figure {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: min-content 1fr;
   gap: 2px;
   -webkit-overflow-scrolling: touch;
   flex: 1;
@@ -68,16 +79,16 @@ figure {
   overflow: hidden;
 }
 
-/* .skeleton:after {
+.skeleton:after {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.25) 100%);
   content: '';
-} */
+}
 
 .gallery__image {
   cursor: pointer;

@@ -4,6 +4,7 @@ figma.showUI(__html__, {width: 400, height: 600});
 
 figma.ui.onmessage = (event) => {
   const {type, message} = event;
+
   if (type === 'notice') {
     figma.notify(message.text);
   }
@@ -42,5 +43,8 @@ figma.ui.onmessage = (event) => {
         node.fills = fills;
       }
     }
+
+    // Tell the plugin that the image was inserted
+    figma.ui.postMessage({type: 'photo-inserted'});
   }
 };

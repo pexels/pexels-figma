@@ -17,6 +17,7 @@
     "json-server": "^0.16.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-intersection-observer": "^8.26.1",
     "react-loading-skeleton": "^2.0.1"
   },
   "devDependencies": {
