@@ -3,6 +3,7 @@ import useInfiniteScroll from '@closeio/use-infinite-scroll';
 import Skeleton from 'react-loading-skeleton';
 import Photo from './Photo';
 import SearchBar from './SearchBar';
+import EmptyState from './EmptyState';
 
 const Gallery = (props) => {
   // Constants
@@ -67,14 +68,22 @@ const Gallery = (props) => {
   return (
     <React.Fragment>
       <SearchBar onUserSubmit={handleSearchSubmit} />
+
       {loading && (
         <div className="skeleton">
           <Skeleton count={8} height={HEIGHT} />
         </div>
       )}
+
+      {!loading && !photos.length && <EmptyState />}
+
       <div id="gallery" className="gallery" ref={scrollerRef}>
         {gallery}
-        {hasMore && <div ref={loaderRef}>Loading&hellip;</div>}
+        {hasMore && (
+          <div className="infinite-scroll-loader" ref={loaderRef}>
+            Loading more photos&hellip;
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

@@ -25,6 +25,7 @@ body {
   text-align: left;
   overflow: hidden;
   height: 100vh;
+  letter-spacing: 0.005em;
 }
 
 a {
@@ -240,7 +241,6 @@ figure {
   margin-right: -20px;
   padding: 20px;
   text-align: center;
-  letter-spacing: 0.005em;
   height: 100%;
   flex-direction: column;
   display: flex;
@@ -279,4 +279,15 @@ figure {
 
 .empty__button {
   margin-top: 40px !important;
+}
+
+.infinite-scroll-loader {
+  opacity: 0.5;
+  grid-column: span 2;
+  width: 100%;
+  padding: 8px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 16px;
+  background: white;
 }
