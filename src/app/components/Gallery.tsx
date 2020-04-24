@@ -4,6 +4,7 @@ import Skeleton from 'react-loading-skeleton';
 import Photo from './Photo';
 import SearchBar from './SearchBar';
 import EmptyState from './EmptyState';
+import randomNumber from '../utils/random-number';
 
 const Gallery = (props) => {
   // Constants
@@ -17,7 +18,7 @@ const Gallery = (props) => {
   const [searchTerm, setSearchTerm] = React.useState('');
   const [photos, setPhotos] = React.useState([]);
   const [hasMore, setHasMore] = React.useState(false);
-  const [pageNumber, setPageNumber] = React.useState(1);
+  const [pageNumber, setPageNumber] = React.useState(randomNumber);
   const [endpoint, setEndpoint] = React.useState(`curated?`);
   const [initialLoad, setInitialLoad] = React.useState(true);
 
