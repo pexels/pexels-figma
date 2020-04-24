@@ -5,9 +5,12 @@ const SearchBar = (props) => {
   const [value, setValue] = React.useState('');
 
   // Needs an change event handler or the input is readobnly
-  const onInputChange = React.useCallback((event) => {
-    setValue(event.target.value);
-  }, []);
+  const onInputChange = React.useCallback(
+    (event) => {
+      setValue(event.target.value);
+    },
+    [value],
+  );
 
   // Use useCallback to optimize child re-rendering
   // Need to pass the properties in the array at the end of the function
@@ -18,6 +21,7 @@ const SearchBar = (props) => {
       event.preventDefault();
 
       // If the search term isn't empty
+      // TODO: IF the value is the same as the previous submission
       if (value !== '') {
         // Send the value to the parent component
         props.onUserSubmit(value);

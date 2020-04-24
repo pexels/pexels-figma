@@ -19,6 +19,7 @@ const Gallery = (props) => {
   const [hasMore, setHasMore] = React.useState(false);
   const [pageNumber, setPageNumber] = React.useState(1);
   const [endpoint, setEndpoint] = React.useState(`curated?`);
+  const [initialLoad, setInitialLoad] = React.useState(true);
 
   // Infinite Scroll
   const [page, loaderRef, scrollerRef] = useInfiniteScroll({hasMore});
@@ -31,9 +32,6 @@ const Gallery = (props) => {
       })
         .then((response) => response.json())
         .then((data) => {
-          // No longer loeading
-          setLoading(false);
-
           // Update the page number after we've loaded the previous
           setPageNumber((prev) => prev + 1);
 
@@ -42,6 +40,9 @@ const Gallery = (props) => {
 
           // Combine the previous array of photos with the new data
           setPhotos((prev) => [...prev, ...data.photos]);
+
+          // No longer loeading
+          setLoading(false);
         })
         .catch(props.onError); // Send the error to the parent for use in the notice
     })();
@@ -52,6 +53,7 @@ const Gallery = (props) => {
     // Clear the curated photos
     setPhotos([]);
     setEndpoint(`search?query=${term}`);
+    setInitialLoad(false);
     setLoading(true);
     setSearchTerm(term);
     setPageNumber(1);
@@ -68,14 +70,13 @@ const Gallery = (props) => {
   return (
     <React.Fragment>
       <SearchBar onUserSubmit={handleSearchSubmit} />
-
       {loading && (
         <div className="skeleton">
           <Skeleton count={8} height={HEIGHT} />
         </div>
       )}
 
-      {!loading && !photos.length && <EmptyState />}
+      {!photos.length && !initialLoad && !loading && <EmptyState searchTerm={searchTerm} />}
 
       <div id="gallery" className="gallery" ref={scrollerRef}>
         {gallery}
