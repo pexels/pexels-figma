@@ -24,7 +24,7 @@ The main plugin code is in `src/code.ts`. The HTML for the UI is in
 ```
 git clone git@github.com:craigmdennis/figma-pexels.git
 cd figma-pexels
-npm install
+yarn install
 ```
 
 ### Generate an API key
@@ -37,13 +37,13 @@ npm install
 Run once.
 
 ```
-npm run build
+yarn build
 ```
 
 Watch for changes.
 
 ```
-npm run watch
+yarn build:watch
 ```
 
 ## Point Figma to the plugin
