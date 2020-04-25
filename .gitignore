@@ -1,5 +1,5 @@
-node_modules/
-.env
-.DS_Store
-dist/
+node_modules
+dist
+settings.json
+yarn-error.log
 secrets.js
