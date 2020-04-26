@@ -14,7 +14,7 @@ const Gallery = (props) => {
   const URL = 'https://api.pexels.com/v1/';
 
   // States
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [photos, setPhotos] = React.useState([]);
   const [hasMore, setHasMore] = React.useState(false);
