@@ -2,7 +2,7 @@
 
 # Pexels Figma Plugin
 
-![Node.js CI](https://github.com/craigmdennis/figma-pexels/workflows/Node.js%20CI/badge.svg)
+![Node.js CI](https://github.com/pexels/pexels-figma/workflows/Node.js%20CI/badge.svg)
 
 A Figma plugin to insert photos from the popular free stock photography site Pexels. All Pexels plugins are [listed on the website](https://www.pexels.com/pro/).
 
@@ -22,8 +22,8 @@ The main plugin code is in `src/code.ts`. The HTML for the UI is in
 ### Clone the repository and install the dependencies
 
 ```
-git clone git@github.com:craigmdennis/figma-pexels.git
-cd figma-pexels
+git clone git@github.com:pexels/pexels-figma.git
+cd pexels-figma
 yarn install
 ```
 
