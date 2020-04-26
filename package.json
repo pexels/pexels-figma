@@ -11,6 +11,7 @@
   "dependencies": {
     "@closeio/use-infinite-scroll": "^1.0.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "purgecss-webpack-plugin": "^2.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-intersection-observer": "^8.26.1",
@@ -47,7 +48,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,css,json}": [
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ]
   }
 }

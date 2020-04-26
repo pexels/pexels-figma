@@ -1,8 +1,8 @@
-trailingComma: 'all'
+trailingComma: all
 singleQuote: true
 semi: true
 printWidth: 120
 tabWidth: 2
 bracketSpacing: false
-arrowParens: 'always'
+arrowParens: always
 jsxBracketSameLine: true
