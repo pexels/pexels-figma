@@ -36,7 +36,7 @@ jobs:
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./pexels-figma-plugin.zip ./dist
+          args: zip -qq -r ../pexels-figma-plugin.zip ./dist
 
       - name: Create Release
         uses: ncipollo/release-action@v1.6.1
