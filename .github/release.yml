@@ -5,8 +5,10 @@ name: Build & Package for Release
 
 on:
   push:
+    branches:
+      - 'master'
     tags:
-      - '*'
+      - 'v1.*'
 
 jobs:
   build:
