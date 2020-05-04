@@ -6,7 +6,7 @@ name: Build & Package for Release
 on:
   push:
     tags:
-      - '*'
+      - '*.*'
 
 jobs:
   build:
