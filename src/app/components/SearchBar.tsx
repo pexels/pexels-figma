@@ -3,6 +3,7 @@ import * as React from 'react';
 const SearchBar = (props) => {
   // Set the state to an empty string
   const [value, setValue] = React.useState('');
+  const textInput = React.useRef(null);
 
   // Needs an change event handler or the input is readobnly
   const onInputChange = React.useCallback(
@@ -11,6 +12,11 @@ const SearchBar = (props) => {
     },
     [value],
   );
+
+  // Apply focus to the currently referenced input
+  const focus = () => {
+    textInput.current.focus();
+  };
 
   // Use useCallback to optimize child re-rendering
   // Need to pass the properties in the array at the end of the function
@@ -30,6 +36,9 @@ const SearchBar = (props) => {
     [value],
   );
 
+  // Focus the plugin when it first runs
+  React.useEffect(() => focus(), []);
+
   return (
     <form id="search-container" className="search" onSubmit={onSearchSubmit}>
       <div className="input-icon">
@@ -38,6 +47,7 @@ const SearchBar = (props) => {
         </div>
         <input
           id="search"
+          ref={textInput}
           value={value}
           onChange={onInputChange}
           type="search"
