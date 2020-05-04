@@ -1,6 +1,6 @@
 {
   "name": "pexels-figma",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Figma plugin to insert photos from Pexels.",
   "homepage": "https://www.figma.com/community/plugin/829802086526281657/Pexels",
   "license": "ISC",
