@@ -2,8 +2,6 @@
 
 # Pexels Figma Plugin
 
-![Build & Package for Release](https://github.com/pexels/pexels-figma/workflows/Build%20&%20Package%20for%20Release/badge.svg)
-
 A Figma plugin to insert photos from the popular free stock photography site Pexels. All Pexels plugins are [listed on the website](https://www.pexels.com/pro/).
 
 ## Photo Usage Licence
