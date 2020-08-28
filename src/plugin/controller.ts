@@ -46,5 +46,6 @@ figma.ui.onmessage = (event) => {
 
     // Tell the plugin that the image was inserted
     figma.ui.postMessage({type: 'photo-inserted'});
+    figma.notify('Photo Inserted');
   }
 };
