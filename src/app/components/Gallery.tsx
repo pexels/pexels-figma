@@ -25,6 +25,15 @@ const Gallery = (props) => {
   // Infinite Scroll
   const [page, loaderRef, scrollerRef] = useInfiniteScroll({hasMore});
 
+  // Handle Fetch Errors
+  const handleErrors = (error) => {
+    // Pass the error to the parent
+    props.onError(error);
+
+    // Stop the loading animation
+    setLoading(false);
+  };
+
   // Initiate data fetching
   React.useEffect(() => {
     (async () => {
@@ -45,7 +54,7 @@ const Gallery = (props) => {
           // No longer loeading
           setLoading(false);
         })
-        .catch(props.onError); // Send the error to the parent for use in the notice
+        .catch(handleErrors); // Send the error to the parent for use in the notice
     })();
   }, [page, searchTerm]);
 

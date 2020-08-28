@@ -6,7 +6,7 @@ const Notice = ({content, isError, showSpinner}) => {
     if (showSpinner) {
       return (
         <div className="visual-bell__spinner-container">
-          <span className="visual-bell__spinner" />
+          <div className="icon icon--spinner icon--spin icon--white8"></div>
         </div>
       );
     } else {

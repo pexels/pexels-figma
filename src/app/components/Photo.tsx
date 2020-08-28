@@ -4,6 +4,7 @@ import IconCamera from '../assets/icon-camera.svg';
 
 const Photo = (props) => {
   const {photo, width = 199, height = 140} = props;
+
   const [imageLoaded, setImageLoaded] = React.useState(false);
 
   // Update the state when the image has loaded
@@ -13,8 +14,12 @@ const Photo = (props) => {
 
   // Create the photo in figma
   const handleClickedPhoto = React.useCallback(() => {
-    // Pass the message to the parent to display a notice
-    props.onInsert({content: `Inserting Photo`, isError: false, showSpinner: true});
+    // // Pass the message to the parent to display a notice
+    props.onInsert({
+      content: `Inserting Photo...`,
+      isError: false,
+      showSpinner: true,
+    });
 
     // Get the clicked image
     const clickedImage = event.srcElement as HTMLImageElement;
@@ -55,7 +60,7 @@ const Photo = (props) => {
           src={photo.src.tiny}
           alt={`Photo by ${photo.photographer}`}
           title={`Photo by ${photo.photographer}`}
-          data-insert-url={photo.src.original}
+          data-insert-url={photo.src.large2x}
           width={width}
           height={height}
         />

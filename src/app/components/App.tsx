@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../styles/ui.css';
-import 'figma-plugin-ds/figma-plugin-ds.min.css';
+import 'figma-plugin-ds/dist/figma-plugin-ds.css';
 import Footer from './Footer';
 import Gallery from './Gallery';
 import Notice from './Notice';
@@ -18,9 +18,18 @@ const App = ({}) => {
     setMessage({content, isError, showSpinner});
   };
 
-  // Abstracted error function
+  // Show an error message
   const handleError = (error) => {
-    setMessage({content: `Error: ${error.response.data.error}`, isError: true, showSpinner: false});
+    let errorMessage = error;
+
+    // If there is an actual response
+    if (error.response) {
+      // Use the response data as the error message
+      errorMessage = error.response.data.error;
+    }
+
+    // Display the error message as a notice
+    setMessage({content: `Error: ${errorMessage}`, isError: true, showSpinner: false});
   };
 
   React.useEffect(() => {
