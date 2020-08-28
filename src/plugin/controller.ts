@@ -30,6 +30,7 @@ figma.ui.onmessage = (event) => {
     // If no selection
     if (figma.currentPage.selection.length === 0) {
       const rect = figma.createRectangle();
+      rect.name = `Pexels Photo by ${message.photographer}`;
 
       // Half the size of the image so it looks good on retina
       rect.resizeWithoutConstraints(message.width / 2, message.height / 2);

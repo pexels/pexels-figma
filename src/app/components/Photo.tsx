@@ -45,6 +45,7 @@ const Photo = (props) => {
                 data: new Uint8Array(buffer),
                 width: photo.width,
                 height: photo.height,
+                photographer: photo.photographer,
               },
             },
           },
