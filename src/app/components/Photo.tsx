@@ -55,7 +55,7 @@ const Photo = (props) => {
           src={photo.src.tiny}
           alt={`Photo by ${photo.photographer}`}
           title={`Photo by ${photo.photographer}`}
-          data-insert-url={photo.src.original}
+          data-insert-url={photo.src.large2x}
           width={width}
           height={height}
         />
