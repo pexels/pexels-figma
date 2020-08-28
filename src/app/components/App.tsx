@@ -1,6 +1,6 @@
 import * as React from 'react';
 import '../styles/ui.css';
-import 'figma-plugin-ds/figma-plugin-ds.min.css';
+import 'figma-plugin-ds/dist/figma-plugin-ds.css';
 import Footer from './Footer';
 import Gallery from './Gallery';
 import Notice from './Notice';
