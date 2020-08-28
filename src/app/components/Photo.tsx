@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Skeleton from 'react-loading-skeleton';
 import IconCamera from '../assets/icon-camera.svg';
+import handleErrors from '../utils/handle-errors';
 
 const Photo = (props) => {
   const {photo, width = 199, height = 140} = props;
@@ -14,12 +15,15 @@ const Photo = (props) => {
 
   // Create the photo in figma
   const handleClickedPhoto = React.useCallback(() => {
-    // // Pass the message to the parent to display a notice
-    props.onInsert({
-      content: `Inserting Photo...`,
-      isError: false,
-      showSpinner: true,
-    });
+    parent.postMessage(
+      {
+        pluginMessage: {
+          type: 'notice',
+          message: {text: 'Downloading Photo...', timeout: 30000},
+        },
+      },
+      '*',
+    );
 
     // Get the clicked image
     const clickedImage = event.srcElement as HTMLImageElement;
@@ -29,6 +33,7 @@ const Photo = (props) => {
 
     // Fetch the image
     fetch(insertURL)
+      .then(handleErrors)
       .then((response) => response.arrayBuffer())
       .then((buffer) => {
         // Send data to the pligin code
@@ -46,7 +51,7 @@ const Photo = (props) => {
           '*',
         );
       })
-      .catch(props.onError);
+      .catch((error) => console.log(error));
   }, []);
 
   // If the image hasn't loaded then show an empty state

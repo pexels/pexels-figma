@@ -1,23 +1,37 @@
 import clone from './clone';
 
+let notification;
+
+// Allows us to cancel notifications instead of queing them
+const cancelNotify = (el) => {
+  if (typeof el !== 'undefined' && typeof el.cancel === 'function') {
+    el.cancel();
+  }
+};
+
 figma.showUI(__html__, {width: 400, height: 600});
 
 figma.ui.onmessage = (event) => {
   const {type, message} = event;
 
+  // Notice messages
   if (type === 'notice') {
-    figma.notify(message.text);
+    let timeout = message.timeout || 4000;
+    // Cancel any existing message
+    cancelNotify(notification);
+    // Display a new message
+    notification = figma.notify(message.text, {timeout});
   }
 
+  // Image data
   if (type === 'imageHash') {
     const imageHash = figma.createImage(message.data).hash;
 
     // If no selection
     if (figma.currentPage.selection.length === 0) {
-      // figma.notify('Nothing selected.');
       const rect = figma.createRectangle();
 
-      // Halfthe soze of the image so it looks good on retina
+      // Half the size of the image so it looks good on retina
       rect.resizeWithoutConstraints(message.width / 2, message.height / 2);
 
       // Center the frame in our current viewport so we can see it.
@@ -46,6 +60,9 @@ figma.ui.onmessage = (event) => {
 
     // Tell the plugin that the image was inserted
     figma.ui.postMessage({type: 'photo-inserted'});
-    figma.notify('Photo Inserted');
+    // Cancel any existing message
+    cancelNotify(notification);
+    // Display a new message
+    notification = figma.notify('Photo Inserted', {timeout: 2000});
   }
 };
