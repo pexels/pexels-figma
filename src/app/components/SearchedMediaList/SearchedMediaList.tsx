@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './SearchedMediaList.module.scss';
-import { Button, MediaList, LoadMoreTrigger, InfiniteLoader } from '@pexels/figma';
+import { Button, MediaList, LoadMoreTrigger, InfiniteLoader, NoResults } from '@pexels/figma';
 import { LoopIcon } from '@pexels/icons';
 import { usePhotosSearch } from '../../../api';
 import { postPluginMessage } from '../../utils/post-plugin-message';
@@ -59,6 +59,14 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
       });
     }
   }, [error]);
+
+  if (!error && photos.length === 0) {
+    return (
+      <NoResults>
+        No results found for&nbsp;<strong>&ldquo;{query}&rdquo;</strong>
+      </NoResults>
+    );
+  }
 
   return (
     <>
