@@ -3,11 +3,12 @@ import { Select } from '@pexels/figma';
 import { ImageSize } from '../../../constants';
 
 type Props = {
+  disabled?: boolean;
   selected: ImageSize;
   onSelect: (value: ImageSize) => void;
 }
 
-export const ImageSizeSelect: React.FC<Props> = ({ selected, onSelect }) => {
+export const ImageSizeSelect: React.FC<Props> = ({ disabled, selected, onSelect }) => {
   const options = React.useMemo(() => ([
     { label: 'All Sizes', value: ImageSize.ALL },
     { label: 'Large', value: ImageSize.LARGE },
@@ -18,6 +19,7 @@ export const ImageSizeSelect: React.FC<Props> = ({ selected, onSelect }) => {
   return (
     <Select
       id="imageSize"
+      disabled={disabled}
       defaultValue={ImageSize.ALL}
       options={options}
       selected={selected}

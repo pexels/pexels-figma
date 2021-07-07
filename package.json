@@ -1,6 +1,6 @@
 {
   "name": "pexels-figma",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "A Figma plugin to insert photos from Pexels.",
   "homepage": "https://www.figma.com/community/plugin/829802086526281657/Pexels",
   "license": "ISC",
@@ -12,10 +12,10 @@
   "author": "Craig Dennis <craig@simplebitdesign.com> (https://craigmdennis.com)",
   "dependencies": {
     "@closeio/use-infinite-scroll": "^1.0.0",
-    "@pexels/figma": "^2.7.9",
-    "@pexels/types": "^2.7.9",
-    "@pexels/utils": "^2.7.9",
-    "@pexels/icons": "^2.7.9",
+    "@pexels/figma": "^2.7.10",
+    "@pexels/types": "^2.7.10",
+    "@pexels/utils": "^2.7.10",
+    "@pexels/icons": "^2.7.10",
     "babel-plugin-styled-components": "^1.10.7",
     "framer-motion": "^4.1.17",
     "pexels": "^1.2.1",

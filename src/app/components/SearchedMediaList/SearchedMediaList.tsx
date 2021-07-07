@@ -25,12 +25,13 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
   const searchParams = React.useMemo(() => ({ query, orientation, size: imageSize, color: imageColor }), [query, orientation, imageSize, imageColor]);
   const { error, data, size, setSize } = usePhotosSearch(searchParams);
 
-  const showLoadMore = React.useMemo(() => !error && data && size === data.length, [data, size, error]);
   const photos = React.useMemo(() => {
     return (data ?? []).reduce<Media[]>((acc, v) => {
       return acc.concat(v.photos.map(p => photoToMediaObject(p)));
     }, []);
   }, [data]);
+  const showLoadMore = React.useMemo(() => !error && data && size === data.length, [data, size, error]);
+  const showNoResults = React.useMemo(() => (!error && !!data?.length && photos.length === 0), [error, data, photos]);
 
   const onRandomClick = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(async () => {
     const rng = randomNumber(photos.length);
@@ -60,40 +61,27 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
     }
   }, [error]);
 
-  if (!error && !!data?.length && photos.length === 0) {
-    return (
-      <NoResults>
-        No results found for&nbsp;<strong>&ldquo;{query}&rdquo;</strong>
-      </NoResults>
-    );
-  }
-
-  if (!error && !data?.length) {
-    return (
-      <div className={styles.loader}>
-        <InfiniteLoader />
-      </div>
-    );
-  }
-
   return (
     <>
       <div className={styles.filters}>
         <OrientationSelect
+          disabled={showNoResults}
           selected={orientation}
           onSelect={setOrientation}
         />
         <ImageSizeSelect
+          disabled={showNoResults}
           selected={imageSize}
           onSelect={setImageSize}
         />
         <ColorSelect
+          disabled={showNoResults}
           selected={imageColor}
           onSelect={setImageColor}
         />
       </div>
       <Button
-        disabled={downloading !== -1}
+        disabled={downloading !== -1 || showNoResults}
         loading={downloading !== -1}
         theme="primary"
         icon={<LoopIcon />}
@@ -101,19 +89,27 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
       >
         Insert random image
       </Button>
-      <MediaList
-        media={photos}
-        onMediaClick={onMediaClick}
-        isDownloading={downloading === -1 ? false : downloading}
-      />
-      {(showLoadMore) ? (
-        <LoadMoreTrigger
-          onLoadMore={onLoadMore}
-        />
+      {showNoResults ? (
+        <NoResults>
+          No results found for&nbsp;<strong>&ldquo;{query}&rdquo;</strong>
+        </NoResults>
       ) : (
-        <div className={styles.loader}>
-          <InfiniteLoader />
-        </div>
+        <>
+          <MediaList
+            media={photos}
+            onMediaClick={onMediaClick}
+            isDownloading={downloading === -1 ? false : downloading}
+          />
+          {(showLoadMore) ? (
+            <LoadMoreTrigger
+              onLoadMore={onLoadMore}
+            />
+          ) : (
+            <div className={styles.loader}>
+              <InfiniteLoader />
+            </div>
+          )}
+        </>
       )}
     </>
   );

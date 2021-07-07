@@ -1042,48 +1042,48 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
-"@pexels/constants@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/constants/2.7.9/000c4df3a27d34de76570e7c0d139ba47eef48160e2d9e4e517177de1ee10768#9c8783a92f713e2a37da4ca8a5ed9fa326498353"
-  integrity sha512-fMag/LkP9xvhLKY+vmM44g91ToeqQDmsD+ozLrHp/1P3NIknp7E8i+YBzx5r+ovKtEd7ysy28vmDNwJ/uDwPUQ==
+"@pexels/constants@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/constants/2.7.10/6052edeb0925badf69d4f25d289d7ff1e48151170847d080bf6814d5927354a5#af8f53d319d361b16bcae4d4a30b3f0f764ff459"
+  integrity sha512-R1akTKM2rsiz80Ri/rwGuVPCHED+RwKedxTxkWF8/ilxK3BzUoRgc0Ji9EmK9ztZ3SuuxDe0/m8CNJTOhiNE4g==
 
-"@pexels/figma@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/figma/2.7.9/0522872f608438e6357aa416390c3f787e356e44c9983dc8108b24457a064a4f#bf26ca63e4598ca37dcc311ac219f838594de5fa"
-  integrity sha512-lnwONW6rtT8lm2+DCDezkq53WIuxtm1faDU2tkJrTgbBBL+KI5WkxVHSoTvVYwsASJd6j7aLkqZFn6flmoyCKA==
+"@pexels/figma@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/figma/2.7.10/1b68b0e260114031553dbc48d4db73d05ada3a3bd7e2fc9f3b28e353823df58c#3126d01aa36e935f7d4e5c663f998cc766a30faf"
+  integrity sha512-Qt/NHfoJIUoYM82OC2Cj7I9GdJb9ulsPH24akNDBkmZbsJBHYrXzgGqHq5gQocVKVpBuwhGmU5tDUx/txnkzhA==
   dependencies:
-    "@pexels/constants" "^2.7.9"
-    "@pexels/hooks" "^2.7.9"
-    "@pexels/icons" "^2.7.9"
-    "@pexels/utils" "^2.7.9"
+    "@pexels/constants" "^2.7.10"
+    "@pexels/hooks" "^2.7.10"
+    "@pexels/icons" "^2.7.10"
+    "@pexels/utils" "^2.7.10"
     classnames "^2.3.1"
     modern-css-reset "^1.4.0"
     react-responsive-masonry "^2.1.3"
 
-"@pexels/hooks@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/hooks/2.7.9/875eb1a3a171de8faa2c224b509c49681d3ce745155d29983a8cef2eeaef56c2#1efc624078f1f7e22cbbad2d27b1bde3e6216937"
-  integrity sha512-KmS1k4yFbKGUpQCr0PYcsexKGcUscE1s0M1ywXJ0191p0JGte7I0GyVU+KGkAC/aBcm00eqeu7hx59ajUhVDOA==
+"@pexels/hooks@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/hooks/2.7.10/1220a1640e0a383d6f4e53f603fedc068dd74147cd4d01405b5df8d9650463c0#bc31e035c0d88645b53eedb37eaadc2d304cf127"
+  integrity sha512-+sgTZm1X2xoTuGJWJHRzFw5yrZMdDHiggl29zE+IsZ8V+enhAfJhSZXxiKTWLKZK4FjApWGhVwb4eOmCgH3GOA==
 
-"@pexels/icons@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/icons/2.7.9/c90596c9c6d78b1216fc68bf33af788993df529698ef6a3cb4d02396e91ea643#41345627a385fc9d66ba8899b48f33a2bd66acc0"
-  integrity sha512-GtpNN+gMBOszqxDgXsjRcVvGjewv+O6PrYPlijFebXTwwe/mpjPO2QskLR/RXXKmnsGt/68ZD2WdnF5WyZjzdQ==
+"@pexels/icons@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/icons/2.7.10/9405cb6ae9da4e3aead4bedd8bfa56288420cf6df34060d9c337ec8c7f1602fc#5bc4803cd4bab8f32a340114d6d33e3b82fd61e1"
+  integrity sha512-p8PwANmuKfIHwcyjBmdk9AuTGwIF/PGbrLPkW2AeFwT7AJRzTCD+a/XkVYw9Faiw0b2CJZVjEN1zEC6miad6zg==
 
-"@pexels/types@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/types/2.7.9/6a9661ff116e82e9adf96cd3f0cc50288f0fdc05702cabbc960d1e19e1d634bf#3cfde60d985e689df28fcd3ba21cd9e3e75ef347"
-  integrity sha512-Dof6kUdOtWdxnhL+uuciS8PIKxs0KYqZZXJGcrsfoUu/eUjtRxT124IVbBZVTQk0E8ISPyWHH+9ESNasKYqiSw==
+"@pexels/types@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/types/2.7.10/4841d0ffd9e5a166758da53f7a0cc61f7baf9c697784133c917821d9cf9786d5#abc425545f99cbacb4c23f3d832869ce42abeeff"
+  integrity sha512-N5+S0PbRP7cMfpFFcdYOzG/VrfXFU3zYp/OY5pzSAR4oMD6DCUMjF7XK+VuUqNuCXR/RkE3tiDVsTr9eaqfG3Q==
   dependencies:
-    "@pexels/constants" "^2.7.9"
+    "@pexels/constants" "^2.7.10"
 
-"@pexels/utils@^2.7.9":
-  version "2.7.9"
-  resolved "https://npm.pkg.github.com/download/@pexels/utils/2.7.9/1a1ddf46a29b8126612cfbd1c5015bc892cdeebc2864d5b674f4a50b8547cdcf#722c7aeb8443baf522dc19b4fab8d3b9c60194e1"
-  integrity sha512-Boc/R4qEOPZLqyDT9XxoGSVO51FjZq1WYGlRRNWxj70dHUYWlX8Yv7dx2SUeNXu8o9XLYhjFe6tnNWs2+h0Sbg==
+"@pexels/utils@^2.7.10":
+  version "2.7.10"
+  resolved "https://npm.pkg.github.com/download/@pexels/utils/2.7.10/36ce7ae73ac32484e392798849acee8d9112c608598922714d498934d37453c3#ec0f3f76af6c5d1cf70660ec53373b198054c1b1"
+  integrity sha512-rBXk6OqLZX5zfMeVHn8XbV4oim+2071Fjys2fB9P3cAendJwOxUv/8hz43MAuIUCg0QfXczDNTCgAIdI3oMwmg==
   dependencies:
-    "@pexels/constants" "^2.7.9"
-    "@pexels/types" "^2.7.9"
+    "@pexels/constants" "^2.7.10"
+    "@pexels/types" "^2.7.10"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"

@@ -4,6 +4,7 @@ import { Select } from '@pexels/figma';
 import { ImageColor } from '../../../constants';
 
 type Props = {
+  disabled?: boolean;
   selected: ImageColor;
   onSelect: (value: ImageColor) => void;
 }
@@ -24,7 +25,7 @@ const HexColorMap = {
   [ImageColor.WHITE]: '#ffffff',
 }
 
-export const ColorSelect: React.FC<Props> = ({ selected, onSelect }) => {
+export const ColorSelect: React.FC<Props> = ({ disabled, selected, onSelect }) => {
   const options = React.useMemo(() => ([
     { label: 'All Colors', value: ImageColor.ALL },
     { label: 'Black', value: ImageColor.BLACK },
@@ -53,6 +54,7 @@ export const ColorSelect: React.FC<Props> = ({ selected, onSelect }) => {
   return (
     <Select
       id="orientation"
+      disabled={disabled}
       defaultValue={ImageColor.ALL}
       options={options}
       selected={selected}
