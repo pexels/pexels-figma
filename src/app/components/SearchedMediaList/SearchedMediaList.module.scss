@@ -1,0 +1,13 @@
+.filters {
+  position: relative;
+  display: flex;
+  gap: var(--space--3);
+  z-index: 2;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}

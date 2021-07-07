@@ -1,0 +1,13 @@
+.colorOption {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 1.2rem;
+  align-items: center;
+
+  .color {
+    border-radius: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border: .12rem solid var(--color--alto);
+  }
+}

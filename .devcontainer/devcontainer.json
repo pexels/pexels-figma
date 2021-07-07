@@ -1,0 +1,11 @@
+{
+  "image": "node:14",
+  "containerUser": "node",
+  "extensions": [
+    "editorconfig.editorconfig",
+    "me-dutour-mathieu.vscode-github-actions"
+  ],
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.npmrc,target=/home/node/.npmrc,type=bind,consistency=cached"
+  ]
+}

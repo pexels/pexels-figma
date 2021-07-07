@@ -1,0 +1,14 @@
+.title {
+  font-size: 1.7rem;
+  font-weight: 500;
+  font-family: var(--font-family--sans);
+  color: var(--color--mine-shaft);
+  line-height: 17/48;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}

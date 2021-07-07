@@ -38,21 +38,33 @@ module.exports = (env, argv) => ({
         },
       },
       // Converts TypeScript code to JavaScript
-      {test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/},
+      { test: /\.tsx?$/, use: 'ts-loader', exclude: /node_modules/ },
+
+      {
+        test: /\.module\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { modules: true, importLoaders: 1 },
+          },
+          'sass-loader'
+        ]
+      },
 
       // Enables including CSS by doing "import './file.css'" in your TypeScript code
-      {test: /\.css$/, loader: [{loader: 'style-loader'}, {loader: 'css-loader'}]},
+      { test: /\.css$/, loader: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
 
       // Allows you to use "<%= require('./file.svg') %>" in your HTML code to get a data URI
-      {test: /\.(png|jpg|gif|webp)$/, loader: [{loader: 'url-loader'}]},
+      { test: /\.(png|jpg|gif|webp)$/, loader: [{ loader: 'url-loader' }] },
 
       // Convert SVG to React components
-      {test: /\.svg$/, use: ['@svgr/webpack']},
+      { test: /\.svg$/, use: ['@svgr/webpack'] },
     ],
   },
 
   // Webpack tries these extensions for you if you omit the extension like "import './file'"
-  resolve: {extensions: ['.tsx', '.ts', '.jsx', '.js']},
+  resolve: { extensions: ['.tsx', '.ts', '.jsx', '.js'] },
 
   output: {
     filename: '[name].js',
@@ -62,7 +74,6 @@ module.exports = (env, argv) => ({
   // Tells Webpack to generate "ui.html" and to inline "ui.ts" into it
   plugins: [
     new webpack.EnvironmentPlugin(['API_KEY']),
-    new CopyPlugin([{from: 'manifest.json', to: 'manifest.json'}]),
     new HtmlWebpackPlugin({
       template: './src/app/index.html',
       filename: 'ui.html',
