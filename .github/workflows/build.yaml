@@ -22,6 +22,7 @@ jobs:
         with:
           files: dist/ manifest.json
           dest: plugin.zip
+          recursive: false
       - uses: actions/upload-artifact@v2
         with:
           name: plugin
