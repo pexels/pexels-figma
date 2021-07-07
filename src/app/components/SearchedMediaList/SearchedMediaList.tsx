@@ -60,11 +60,19 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
     }
   }, [error]);
 
-  if (!error && photos.length === 0) {
+  if (!error && !!data?.length && photos.length === 0) {
     return (
       <NoResults>
         No results found for&nbsp;<strong>&ldquo;{query}&rdquo;</strong>
       </NoResults>
+    );
+  }
+
+  if (!error && !data?.length) {
+    return (
+      <div className={styles.loader}>
+        <InfiniteLoader />
+      </div>
     );
   }
 
