@@ -7,7 +7,6 @@ import { postPluginMessage } from '../../utils/post-plugin-message';
 import { Media } from '@pexels/types';
 import { photoToMediaObject } from '@pexels/utils';
 import { OrientationSelect } from '../OrientationSelect';
-import { ImageSizeSelect } from '../ImageSizeSelect';
 import { ColorSelect } from '../ColorSelect';
 import { Orientation, ImageSize, ImageColor } from '../../../constants';
 import { insertMedia } from '../../utils/insert-media';
@@ -68,11 +67,6 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
           disabled={showNoResults}
           selected={orientation}
           onSelect={setOrientation}
-        />
-        <ImageSizeSelect
-          disabled={showNoResults}
-          selected={imageSize}
-          onSelect={setImageSize}
         />
         <ColorSelect
           disabled={showNoResults}
