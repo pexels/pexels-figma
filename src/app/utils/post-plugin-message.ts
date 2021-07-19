@@ -8,15 +8,17 @@ type TNoticeMessage = {
   };
 }
 
-type TImageHashMessage = {
-  type: 'imageHash';
+type TInsertImagesMessage = {
+  type: 'insert-images';
   message: {
-    data: Uint8Array;
-    media: Media
-  };
+    images: {
+      data: Uint8Array;
+      media: Media;
+    }[];
+  }
 }
 
-export type TPluginMessage = TNoticeMessage | TImageHashMessage;
+export type TPluginMessage = TNoticeMessage | TInsertImagesMessage;
 
 export const postPluginMessage = (message: TPluginMessage) => {
   parent.postMessage({

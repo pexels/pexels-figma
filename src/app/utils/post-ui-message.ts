@@ -11,7 +11,17 @@ export type TMediaHistoryChangedMessage = {
   };
 }
 
-export type TUIMessage = TPhotoInsertedMessage | TMediaHistoryChangedMessage;
+export type TSelectionChangedMessage = {
+  type: 'selection-changed';
+  message: {
+    nodes: {
+      id: string;
+      name: string;
+    }[];
+  }
+}
+
+export type TUIMessage = TPhotoInsertedMessage | TMediaHistoryChangedMessage | TSelectionChangedMessage;
 
 export const postUiMessage = (message: TUIMessage) => {
   figma.ui.postMessage(message);

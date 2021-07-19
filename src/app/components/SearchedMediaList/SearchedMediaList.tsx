@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './SearchedMediaList.module.scss';
+import rand from 'random';
 import { Button, MediaList, LoadMoreTrigger, InfiniteLoader, NoResults } from '@pexels/figma';
 import { LoopIcon } from '@pexels/icons';
 import { usePhotosSearch } from '../../../api';
@@ -8,20 +9,20 @@ import { Media } from '@pexels/types';
 import { photoToMediaObject } from '@pexels/utils';
 import { OrientationSelect } from '../OrientationSelect';
 import { ColorSelect } from '../ColorSelect';
-import { Orientation, ImageSize, ImageColor } from '../../../constants';
-import { insertMedia } from '../../utils/insert-media';
-import randomNumber from '../../utils/random-number';
+import { Orientation, ImageColor } from '../../../constants';
+import { insertMultipleMedia, TSelectionChangedMessage } from '../../utils';
+import { useUiMessage } from '../../hooks';
 
 type Props = {
   query: string;
 }
 
 export const SearchedMediaList: React.FC<Props> = ({ query }) => {
-  const [downloading, setDownloading] = React.useState(-1);
+  const selection = useUiMessage<TSelectionChangedMessage>('selection-changed')
+  const [downloading, setDownloading] = React.useState<number[]>([]);
   const [orientation, setOrientation] = React.useState(Orientation.ALL);
-  const [imageSize, setImageSize] = React.useState(ImageSize.ALL);
   const [imageColor, setImageColor] = React.useState(ImageColor.ALL);
-  const searchParams = React.useMemo(() => ({ query, orientation, size: imageSize, color: imageColor }), [query, orientation, imageSize, imageColor]);
+  const searchParams = React.useMemo(() => ({ query, orientation, color: imageColor }), [query, orientation, imageColor]);
   const { error, data, size, setSize } = usePhotosSearch(searchParams);
 
   const photos = React.useMemo(() => {
@@ -33,17 +34,18 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
   const showNoResults = React.useMemo(() => (!error && !!data?.length && photos.length === 0), [error, data, photos]);
 
   const onRandomClick = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(async () => {
-    const rng = randomNumber(photos.length);
-    const media = photos[rng];
-    setDownloading(media.id);
-    await insertMedia(media);
-    setDownloading(-1);
-  }, [photos]);
+    const images = Array.from(Array(selection?.message.nodes.length || 1)).map(_ => {
+      return photos[rand.int(0, photos.length - 1)];
+    });
+    setDownloading(images.map(m => m.id));
+    await insertMultipleMedia(images);
+    setDownloading([]);
+  }, [photos, selection]);
 
   const onMediaClick = React.useCallback(async (media: Media) => {
-    setDownloading(media.id);
-    await insertMedia(media);
-    setDownloading(-1);
+    setDownloading([media.id]);
+    await insertMultipleMedia([media]);
+    setDownloading([]);
   }, []);
 
   const onLoadMore = React.useCallback(() => {
@@ -75,8 +77,8 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
         />
       </div>
       <Button
-        disabled={downloading !== -1 || showNoResults}
-        loading={downloading !== -1}
+        disabled={!!downloading.length || showNoResults}
+        loading={!!downloading.length}
         theme="primary"
         icon={<LoopIcon />}
         onClick={onRandomClick}
@@ -92,7 +94,7 @@ export const SearchedMediaList: React.FC<Props> = ({ query }) => {
           <MediaList
             media={photos}
             onMediaClick={onMediaClick}
-            isDownloading={downloading === -1 ? false : downloading}
+            isDownloading={downloading.length ? downloading : false}
           />
           {(showLoadMore) ? (
             <LoadMoreTrigger

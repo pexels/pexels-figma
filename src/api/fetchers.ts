@@ -1,7 +1,7 @@
 import * as qs from 'qs';
 import { KeyLoader, useSWRInfinite } from 'swr';
 import { createClient, ErrorResponse } from 'pexels';
-import { ImageColor, ImageSize, Orientation } from '../constants';
+import { ImageColor, Orientation } from '../constants';
 
 type TRawPexelsClient = ReturnType<typeof createClient>;
 type TSearchFn = TRawPexelsClient['photos']['search'];
@@ -12,7 +12,6 @@ type TPexelsClient = {
     search: (params: Parameters<TSearchFn>[0] & {
       orientation?: Orientation;
       color?: ImageColor;
-      size?: ImageSize;
     }) => ReturnType<TSearchFn>;
     curated: TCuratedFn;
   };
@@ -67,7 +66,6 @@ export const usePhotosSearch = (opts: Parameters<TPexelsClient['photos']['search
       page: pageIndex + 1,
       query: encodeURIComponent(query),
       orientation: orientation !== Orientation.ALL ? orientation : undefined,
-      size: size !== ImageSize.ALL ? size : undefined,
       color: color !== ImageColor.ALL ? color : undefined,
     });
     if (isErrorResponse(res)) throw new Error(res.error);

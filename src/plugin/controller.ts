@@ -15,6 +15,20 @@ figma.showUI(__html__, { width: 480, height: 620 });
 let mediaHistory = JSON.parse(figma.root.getPluginData(PluginDataKeys.MEDIA_HISTORY) || '[]') as Media[];
 postUiMessage({ type: 'media-history-changed', message: { media: mediaHistory } });
 
+const updateSelection = () => {
+  postUiMessage({
+    type: 'selection-changed',
+    message: {
+      nodes: figma.currentPage.selection.map(node => ({
+        id: node.id,
+        name: node.name,
+      }))
+    }
+  });
+}
+figma.on('selectionchange', updateSelection);
+updateSelection();
+
 figma.ui.onmessage = (event: TPluginMessage) => {
   // Notice messages
   if (event.type === 'notice') {
@@ -27,41 +41,44 @@ figma.ui.onmessage = (event: TPluginMessage) => {
   }
 
   // Image data
-  if (event.type === 'imageHash') {
+  if (event.type === 'insert-images') {
     const message = event.message;
 
-    mediaHistory = mediaHistory.filter(m => m.id !== message.media.id).slice(0, 50);
-    mediaHistory.push(message.media);
-    figma.root.setPluginData(PluginDataKeys.MEDIA_HISTORY, JSON.stringify(mediaHistory));
-    postUiMessage({ type: 'media-history-changed', message: { media: mediaHistory } });
+    for (let i = 0; i < figma.currentPage.selection.length; i++) {
+      const node = figma.currentPage.selection[i];
+      const image = message.images[i % message.images.length];
 
-    const imageHash = figma.createImage(message.data).hash;
+      mediaHistory = mediaHistory.filter(m => m.id !== image.media.id).slice(0, 50);
+      mediaHistory.push(image.media);
+      figma.root.setPluginData(PluginDataKeys.MEDIA_HISTORY, JSON.stringify(mediaHistory));
+      postUiMessage({ type: 'media-history-changed', message: { media: mediaHistory } });
 
-    // If no selection
-    if (figma.currentPage.selection.length === 0) {
-      const rect = figma.createRectangle();
-      rect.name = `Pexels Photo by ${message.media.user.name}`;
+      const imageHash = figma.createImage(image.data).hash;
 
-      // Half the size of the image so it looks good on retina
-      rect.resizeWithoutConstraints(message.media.size.width / 2, message.media.size.height / 2);
+      // If no selection
+      if (figma.currentPage.selection.length === 0) {
+        const rect = figma.createRectangle();
+        rect.name = `Pexels Photo by ${image.media.user.name}`;
+  
+        // Half the size of the image so it looks good on retina
+        rect.resizeWithoutConstraints(image.media.size.width / 2, image.media.size.height / 2);
+  
+        // Center the frame in our current viewport so we can see it.
+        rect.x = figma.viewport.center.x - image.media.size.width / 2;
+        rect.y = figma.viewport.center.y - image.media.size.height / 2;
+  
+        // Use FILL so it can be resized
+        rect.fills = [{type: 'IMAGE', scaleMode: 'FILL', imageHash}];
+  
+        // Add the image to the page
+        figma.currentPage.appendChild(rect);
+  
+        // select the rectangle and focus the viewport
+        figma.currentPage.selection = [rect];
+        figma.viewport.scrollAndZoomIntoView([rect]);
+      }
 
-      // Center the frame in our current viewport so we can see it.
-      rect.x = figma.viewport.center.x - message.media.size.width / 2;
-      rect.y = figma.viewport.center.y - message.media.size.height / 2;
-
-      // Use FILL so it can be resized
-      rect.fills = [{type: 'IMAGE', scaleMode: 'FILL', imageHash}];
-
-      // Add the image to the page
-      figma.currentPage.appendChild(rect);
-
-      // select the rectangle and focus the viewport
-      figma.currentPage.selection = [rect];
-      figma.viewport.scrollAndZoomIntoView([rect]);
-    }
-
-    // If there's a selection, add the image data to each
-    for (const node of figma.currentPage.selection) {
+      // If there's a selection, add the image data to each
       if ('fills' in node) {
         const imagePaint: Paint = { type: 'IMAGE', scaleMode: 'FILL', imageHash };
         node.fills = (node.fills === figma.mixed) ? [imagePaint] : [...node.fills, imagePaint];
@@ -73,6 +90,6 @@ figma.ui.onmessage = (event: TPluginMessage) => {
     // Cancel any existing message
     cancelNotify(notification);
     // Display a new message
-    notification = figma.notify('Photo Inserted', {timeout: 2000});
+    notification = figma.notify('Photo(s) Inserted', {timeout: 2000});
   }
 };
