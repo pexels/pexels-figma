@@ -18,7 +18,7 @@ jobs:
       - run: yarn build
         env:
           API_KEY: ${{ secrets.API_KEY }}
-      - uses: papeloto/action-zip@v1
+      - uses: vimtor/action-zip@v1
         with:
           files: dist/ manifest.json
           dest: plugin.zip
