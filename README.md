@@ -49,3 +49,17 @@ yarn build:watch
 - Open Figma and open any design file (or create a new one) so the “Plugins” app menu item is shown.
 - From the app menu bar go to Plugins → Development → New Plugin.
 - Under “Link existing plugin” select the `manifest.json` file in the unzipped plugin folder.
+
+### Publish a new version
+
+When you're ready to publish a new version make sure you are logged in with the account that owns the plugin (bruno@pexels.com, password is in 1password) and click "Publish new release".
+
+## Troubleshooting
+
+When you run `yarn install` and get a "401 Unauthorized" error make sure that your `~/.npmrc` file looks like this:
+
+```
+registry=https://registry.npmjs.org/
+@pexels:registry=https://npm.pkg.github.com/
+//npm.pkg.github.com/:_authToken=********** (Token generated from github at https://github.com/settings/tokens)
+```
