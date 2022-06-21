@@ -64,7 +64,7 @@ export const usePhotosSearch = (opts: Parameters<TPexelsClient['photos']['search
   const fetcher = async (_: string, pageIndex: number): Promise<FetcherDataType> => {
     const res = await pexelsClient.photos.search({
       page: pageIndex + 1,
-      query: encodeURIComponent(query),
+      query: query,
       orientation: orientation !== Orientation.ALL ? orientation : undefined,
       color: color !== ImageColor.ALL ? color : undefined,
     });
