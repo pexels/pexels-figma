@@ -46,7 +46,7 @@ yarn build:watch
 
 ## Point Figma to the plugin
 
-- Open Figma and open any design file (or create a new one) so the “Plugins” app menu item is shown.
+- Open the Figma desktop app and open any design file (or create a new one) so the “Plugins” app menu item is shown.
 - From the app menu bar go to Plugins → Development → New Plugin.
 - Under “Link existing plugin” select the `manifest.json` file in the unzipped plugin folder.
 
