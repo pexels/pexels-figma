@@ -19,7 +19,7 @@
     "babel-plugin-styled-components": "^1.10.7",
     "framer-motion": "^4.1.17",
     "pexels": "^1.2.1",
-    "qs": "^6.10.1",
+    "qs": "^6.10.3",
     "random": "^3.0.6",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
