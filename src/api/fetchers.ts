@@ -26,7 +26,7 @@ const pexelsClient: TPexelsClient = {
       const apiUrl = `${baseUrl}?${qs.stringify(params)}`;
       const response = await fetch(apiUrl, {
         headers: {
-          authorization: `Authorization ${process.env.API_KEY}`,
+          authorization: `${process.env.API_KEY}`,
         },
       });
       return await response.json();
@@ -36,7 +36,7 @@ const pexelsClient: TPexelsClient = {
       const apiUrl = `${baseUrl}?${qs.stringify(params)}`;
       const response = await fetch(apiUrl, {
         headers: {
-          authorization: `Authorization ${process.env.API_KEY}`,
+          authorization: `${process.env.API_KEY}`,
         },
       });
       return await response.json();
